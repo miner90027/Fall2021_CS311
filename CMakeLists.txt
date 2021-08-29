@@ -3,6 +3,7 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(untitled main.cpp)
+add_subdirectory(TestOriginal)
+add_executable(masterOrig TestOriginal/main.cpp)
 add_subdirectory(TestSeperateProject)
-add_executable(test testSeperateProject/main2.cpp)
+add_executable(masterTest testSeperateProject/main2.cpp)

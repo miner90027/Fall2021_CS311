@@ -2,7 +2,7 @@
 #This file contains an executable for the main file in each subdirectory.
 
 cmake_minimum_required(VERSION 3.20)
-project(untitled)
+project(Fall2021_CS311)
 
 set(CMAKE_CXX_STANDARD 17)
 

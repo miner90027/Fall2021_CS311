@@ -7,9 +7,9 @@ project(Fall2021_CS311)
 set(CMAKE_CXX_STANDARD 17)
 
 #all of the subdirectories
-add_subdirectory(TestOriginal)
-add_subdirectory(TestSeperateProject)
+add_subdirectory(Project1)
+add_subdirectory(Project2)
 
 #all of the executable files
-add_executable(masterTest testSeperateProject/main2.cpp)
-add_executable(masterOrig TestOriginal/main.cpp)
+add_executable(GlobeProject2 Project2/main2.cpp)
+add_executable(GlobeProject1 Project1/main.cpp)

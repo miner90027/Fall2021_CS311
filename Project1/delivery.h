@@ -6,7 +6,7 @@
 #define FALL2021_CS311_DELIVERY_H
 
 
-class delivery {
+class Delivery {
 
 };
 

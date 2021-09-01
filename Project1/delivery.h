@@ -13,43 +13,25 @@
 #include <cassert> // for assert
 
 class Delivery {
-    /*  Constructors */
 public:
-    Delivery(): Delivery("UNSPECIFIED", 0, 1)
-    {}
+    /*  Constructors */
+    Delivery();
 
-    Delivery(std::string prdct, int qunt, int mon)
-    {
-        setProduct(prdct);
-        setQuantity(qunt);
-        setMonth(mon);
-    }
+    Delivery(std::string prdct, int qunt, int mon);
 
     /*  Set data members */
-    void setProduct(std::string prdct){
-        _product = prdct;
-    }
+    void setProduct(std::string prdct);
 
-    void setQuantity(int qunt){
-        _quantity = qunt;
-    }
+    void setQuantity(int qunt);
 
-    void setMonth(int mon){
-        _month = mon;
-    }
+    void setMonth(int mon);
 
     /*  Get data members */
-    std::string getProduct(){
-        return _product;
-    }
+    std::string getProduct();
 
-    int getQuantity(){
-        return _quantity;
-    }
+    int getQuantity();
 
-    int getMonth(){
-        return _month;
-    }
+    int getMonth();
 
     /*  Data members */
 private:

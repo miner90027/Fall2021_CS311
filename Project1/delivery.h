@@ -1,6 +1,10 @@
-//
-// Created by aleks on 8/31/2021.
-//
+/*
+ * delivery.h
+ * Aleks McCormick
+ * 2021/09/01
+ * Fall 2021 CS 311
+ * Header file for Delivery class
+ */
 
 #ifndef FALL2021_CS311_DELIVERY_H
 #define FALL2021_CS311_DELIVERY_H

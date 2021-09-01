@@ -1,5 +1,9 @@
-//
-// Created by aleks on 8/31/2021.
-//
+/*
+ * delivery.cpp
+ * Aleks McCormick
+ * 2021/09/01
+ * Fall 2021 CS 311
+ * cpp file for Delivery class
+ */
 
 #include "delivery.h"

@@ -9,7 +9,6 @@
 #include "delivery.h"
 
     /*  Constructors */
-
 Delivery::Delivery(): Delivery("UNSPECIFIED", 0, 1)
     {}
 
@@ -65,4 +64,9 @@ bool Delivery::operator==(const Delivery &d2) {
 bool Delivery::operator!=(const Delivery &d2) {
 
     return false;
+}
+
+std::ostream & operator<< (std::ostream &os, const Delivery &mon){
+
+    return os;
 }

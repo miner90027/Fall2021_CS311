@@ -13,6 +13,8 @@
 #include <cassert> // for assert
 
 class Delivery {
+    friend std::ostream & operator<< (std::ostream &os, const Delivery &mon);
+
 public:
     /*  Constructors */
     Delivery();

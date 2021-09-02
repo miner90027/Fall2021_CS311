@@ -66,7 +66,7 @@ bool Delivery::operator!=(const Delivery &d2) {
     return false;
 }
 
-std::ostream & operator<< (std::ostream &os, const Delivery &mon){
-
+std::ostream & operator<< (std::ostream &os, Delivery &dliv){
+	//os << dliv.toStiring();
     return os;
 }

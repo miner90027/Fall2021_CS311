@@ -45,3 +45,24 @@ int Delivery::getQuantity(){
 int Delivery::getMonth(){
         return _month;
     }
+
+    /* Other member functions */
+std::string Delivery::toStiring() {
+    return "string";
+}
+
+bool Delivery::empty() {
+
+    return false;
+}
+
+    /*  Overloaded operators */
+bool Delivery::operator==(const Delivery &d2) {
+
+    return false;
+}
+
+bool Delivery::operator!=(const Delivery &d2) {
+
+    return false;
+}

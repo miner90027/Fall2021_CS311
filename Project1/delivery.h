@@ -33,6 +33,16 @@ public:
 
     int getMonth();
 
+    /*  Other member functions */
+    std::string toStiring();
+
+    bool empty();
+
+    /*  Overloaded operators */
+bool operator==(const Delivery & d2);
+
+bool operator!=(const Delivery & d2);
+
     /*  Data members */
 private:
     std::string _product;

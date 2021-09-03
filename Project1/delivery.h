@@ -13,6 +13,7 @@
 #include <cassert> // for assert
 
 class Delivery {
+	/*	Global Operators */
     friend std::ostream & operator<< (std::ostream &os, Delivery &dliv);
 
 public:
@@ -44,6 +45,10 @@ public:
 	bool operator==(const Delivery & d2);
 
 	bool operator!=(const Delivery & d2);
+
+	Delivery & operator++();
+
+	Delivery & operator--();
 
     /*  Data members */
 private:

@@ -66,7 +66,18 @@ bool Delivery::operator!=(const Delivery &d2) {
     return false;
 }
 
+Delivery &Delivery::operator++() {
+	return *this;
+}
+
+Delivery &Delivery::operator--() {
+	return *this;
+}
+
+	/* Global overloaded operators */
 std::ostream & operator<< (std::ostream &os, Delivery &dliv){
 	//os << dliv.toString();
     return os;
 }
+
+

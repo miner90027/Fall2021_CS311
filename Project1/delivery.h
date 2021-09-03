@@ -30,16 +30,16 @@ public:
     void setMonth(int mon);
 
     /*  Get data members */
-    std::string getName();
+    std::string getName() const &;
 
-    int getQuantity();
+    int getQuantity() const &;
 
-    int getMonth();
+    int getMonth() const &;
 
     /*  Other member functions */
-    std::string toString();
+    std::string toString() const &;
 
-    bool empty();
+    bool empty() const &;
 
     /*  Overloaded operators */
 	bool operator==(const Delivery & d2);

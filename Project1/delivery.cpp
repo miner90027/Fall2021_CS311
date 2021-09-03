@@ -33,24 +33,24 @@ void Delivery::setMonth(int mon){
     }
 
     /*  Get data members */
-std::string Delivery::getName(){
+std::string Delivery::getName() const &{
         return _product;
     }
 
-int Delivery::getQuantity(){
+int Delivery::getQuantity() const &{
         return _quantity;
     }
 
-int Delivery::getMonth(){
+int Delivery::getMonth() const &{
         return _month;
     }
 
     /* Other member functions */
-std::string Delivery::toString() {
+std::string Delivery::toString() const &{
     return "string";
 }
 
-bool Delivery::empty() {
+bool Delivery::empty() const & {
 
     return false;
 }

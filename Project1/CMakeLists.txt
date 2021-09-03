@@ -3,4 +3,4 @@ project(Fall2021_CS311)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(project1 main.cpp delivery.cpp delivery.h)
+add_executable(project1 delivery_test.cpp delivery.cpp delivery.h)

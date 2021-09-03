@@ -58,9 +58,9 @@ public:
 
     /*  Data members */
 private:
-    std::string _product;
-    int _month;
-    int _quantity;
+    std::string _product = "UNSPECIFIED";
+    int _month = 1;
+    int _quantity = 0;
     std::vector<std::string> _year = {"dummy","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 };
 

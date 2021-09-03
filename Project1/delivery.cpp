@@ -87,7 +87,7 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 }
 
 	/* Global overloaded operators */
-std::ostream & operator<< (std::ostream &os, Delivery &dliv){
+std::ostream & operator<< (std::ostream &os, const Delivery &dliv){
 	//os << dliv.toString();
     return os;
 }

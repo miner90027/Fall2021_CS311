@@ -14,7 +14,7 @@
 
 class Delivery {
 	/*	Global Operators */
-    friend std::ostream & operator<< (std::ostream &os, Delivery &dliv);
+    friend std::ostream & operator<< (std::ostream &os, const Delivery &dliv);
 
 public:
     /*  Constructors */

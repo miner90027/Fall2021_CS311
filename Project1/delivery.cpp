@@ -15,8 +15,8 @@ Delivery::Delivery(): Delivery("UNSPECIFIED", 0, 1)
 Delivery::Delivery(std::string prdct, int qunt, int mon)
     {
         setName(prdct);
-        setQuantity(qunt);
         setMonth(mon);
+        setQuantity(qunt);
     }
 
     /*  Set data members */
@@ -47,20 +47,18 @@ int Delivery::getMonth() const &{
 
     /* Other member functions */
 std::string Delivery::toString() const &{
-    return "string";
+    std::string output = getName() + " (" + (char) getQuantity()+") , " + _year[_month];
+    return output;
 }
 
 bool Delivery::empty() const & {
 
-    return false;
+    return (_quantity == 0);
 }
 
     /*  Overloaded operators */
 bool Delivery::operator==(const Delivery &d2) const{
-	if(this->getMonth() == d2.getMonth() && this->getQuantity() == d2.getQuantity() && this->getName() == d2.getName())
-    	return true;
-	else
-		return false;
+    return (this->getMonth() == d2.getMonth() && this->getQuantity() == d2.getQuantity() && this->getName() == d2.getName());
 }
 
 bool Delivery::operator!=(const Delivery &d2) const{
@@ -90,8 +88,6 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 
 	/* Global overloaded operators */
 std::ostream & operator<< (std::ostream &os, const Delivery &dliv){
-	os << dliv.toString();
+	//os << dliv.toString();
     return os;
 }
-
-

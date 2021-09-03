@@ -11,6 +11,7 @@
 #define FALL2021_CS311_DELIVERY_H
 
 #include <string> // for std::string
+#include <vector> // for std::vector
 #include <cassert> // for assert
 
 class Delivery {
@@ -60,6 +61,7 @@ private:
     std::string _product;
     int _month;
     int _quantity;
+    std::vector<std::string> _year = {"dummy","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 };
 
 

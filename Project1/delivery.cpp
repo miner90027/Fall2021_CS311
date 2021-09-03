@@ -57,13 +57,15 @@ bool Delivery::empty() const & {
 
     /*  Overloaded operators */
 bool Delivery::operator==(const Delivery &d2) const{
-
-    return false;
+	if(this->getMonth() == d2.getMonth() && this->getQuantity() == d2.getQuantity() && this->getName() == d2.getName())
+    	return true;
+	else
+		return false;
 }
 
 bool Delivery::operator!=(const Delivery &d2) const{
 
-    return false;
+    return !(*this == d2);
 }
 
 Delivery &Delivery::operator++() {
@@ -88,7 +90,7 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 
 	/* Global overloaded operators */
 std::ostream & operator<< (std::ostream &os, const Delivery &dliv){
-	//os << dliv.toString();
+	os << dliv.toString();
     return os;
 }
 

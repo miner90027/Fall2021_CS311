@@ -50,6 +50,10 @@ public:
 
 	Delivery & operator--();
 
+	Delivery operator++([[maybe_unused]]int dummy);
+
+	Delivery operator--([[maybe_unused]]int dummy);
+
     /*  Data members */
 private:
     std::string _product;

@@ -74,6 +74,18 @@ Delivery &Delivery::operator--() {
 	return *this;
 }
 
+Delivery Delivery::operator++([[maybe_unused]]int dummy){
+	auto save = *this;
+	--(*this);
+	return save;
+}
+
+Delivery Delivery::operator--([[maybe_unused]]int dummy){
+	auto save = *this;
+	--(*this);
+	return save;
+}
+
 	/* Global overloaded operators */
 std::ostream & operator<< (std::ostream &os, Delivery &dliv){
 	//os << dliv.toString();

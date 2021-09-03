@@ -42,9 +42,9 @@ public:
     bool empty() const &;
 
     /*  Overloaded operators */
-	bool operator==(const Delivery & d2);
+	bool operator==(const Delivery & d2) const;
 
-	bool operator!=(const Delivery & d2);
+	bool operator!=(const Delivery & d2) const;
 
 	Delivery & operator++();
 

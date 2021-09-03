@@ -56,12 +56,12 @@ bool Delivery::empty() const & {
 }
 
     /*  Overloaded operators */
-bool Delivery::operator==(const Delivery &d2) {
+bool Delivery::operator==(const Delivery &d2) const{
 
     return false;
 }
 
-bool Delivery::operator!=(const Delivery &d2) {
+bool Delivery::operator!=(const Delivery &d2) const{
 
     return false;
 }

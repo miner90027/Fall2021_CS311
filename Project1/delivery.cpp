@@ -14,13 +14,13 @@ Delivery::Delivery(): Delivery("UNSPECIFIED", 0, 1)
 
 Delivery::Delivery(std::string prdct, int qunt, int mon)
     {
-        setProduct(prdct);
+        setName(prdct);
         setQuantity(qunt);
         setMonth(mon);
     }
 
     /*  Set data members */
-void Delivery::setProduct(std::string prdct){
+void Delivery::setName(std::string prdct){
         _product = prdct;
     }
 
@@ -33,7 +33,7 @@ void Delivery::setMonth(int mon){
     }
 
     /*  Get data members */
-std::string Delivery::getProduct(){
+std::string Delivery::getName(){
         return _product;
     }
 
@@ -46,7 +46,7 @@ int Delivery::getMonth(){
     }
 
     /* Other member functions */
-std::string Delivery::toStiring() {
+std::string Delivery::toString() {
     return "string";
 }
 
@@ -67,6 +67,6 @@ bool Delivery::operator!=(const Delivery &d2) {
 }
 
 std::ostream & operator<< (std::ostream &os, Delivery &dliv){
-	//os << dliv.toStiring();
+	//os << dliv.toString();
     return os;
 }

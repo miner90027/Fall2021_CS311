@@ -22,28 +22,28 @@ public:
     Delivery(std::string prdct, int qunt, int mon);
 
     /*  Set data members */
-    void setProduct(std::string prdct);
+    void setName(std::string prdct);
 
     void setQuantity(int qunt);
 
     void setMonth(int mon);
 
     /*  Get data members */
-    std::string getProduct();
+    std::string getName();
 
     int getQuantity();
 
     int getMonth();
 
     /*  Other member functions */
-    std::string toStiring();
+    std::string toString();
 
     bool empty();
 
     /*  Overloaded operators */
-bool operator==(const Delivery & d2);
+	bool operator==(const Delivery & d2);
 
-bool operator!=(const Delivery & d2);
+	bool operator!=(const Delivery & d2);
 
     /*  Data members */
 private:

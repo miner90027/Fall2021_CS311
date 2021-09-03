@@ -4,6 +4,7 @@
  * 2021/09/01
  * Fall 2021 CS 311
  * Header file for Delivery class
+ * Prototype all the functions and data members for the class
  */
 
 #ifndef FALL2021_CS311_DELIVERY_H

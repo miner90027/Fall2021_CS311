@@ -12,6 +12,7 @@
 
 #include <string> // for std::string
 #include <vector> // for std::vector
+#include <ostream>// for std::ostream
 #include <cassert> // for assert
 
 class Delivery {

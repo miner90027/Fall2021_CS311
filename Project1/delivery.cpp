@@ -91,7 +91,6 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 
 	/* Global overloaded operators */
 std::ostream &operator<<(std::ostream &os, const Delivery &dliv){
-	//std::string str = dliv.getName() + " (" + (char) dliv.getQuantity() + "), " + dliv._year[dliv._month];
-	//os << str;
+	os << dliv.toString();
     return os;
 }

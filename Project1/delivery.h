@@ -19,7 +19,8 @@ class Delivery {
 	/********************************************************************/
 	/**					Global Overloaded Operators		 			  ***/
 	/********************************************************************/
-	//overloaded stream insertion operator
+	//operator<<
+	// outputs the string created by toString into an output stream
     friend std::ostream &operator<<(std::ostream &os, const Delivery &dliv);
 
 public:
@@ -27,6 +28,7 @@ public:
 	/**							Constructors			 			  ***/
 	/********************************************************************/
 	//default constructor
+	// sets the product name, amount, and month of delivery to default values
     Delivery();
 
 	//constructor that takes 3 parameters

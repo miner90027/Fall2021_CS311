@@ -46,8 +46,8 @@ int Delivery::getMonth() const &{
     }
 
     /* Other member functions */
-std::string Delivery::toString() const &{
-    std::string output = getName() + " (" + (char) getQuantity()+") , " + _year[_month];
+std::string Delivery::toString() const{
+    std::string output = getName() + " (" + std::to_string(getQuantity()) +"), " + _year[_month];
     return output;
 }
 
@@ -90,7 +90,8 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 }
 
 	/* Global overloaded operators */
-std::ostream & operator<< (std::ostream &os, const Delivery &dliv){
-	//os << dliv.toString();
+std::ostream &operator<<(std::ostream &os, const Delivery &dliv){
+	//std::string str = dliv.getName() + " (" + (char) dliv.getQuantity() + "), " + dliv._year[dliv._month];
+	//os << str;
     return os;
 }

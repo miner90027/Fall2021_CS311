@@ -16,7 +16,7 @@
 
 class Delivery {
 	/*	Global Operators */
-    friend std::ostream & operator<< (std::ostream &os, const Delivery &dliv);
+    friend std::ostream &operator<<(std::ostream &os, const Delivery &dliv);
 
 public:
     /*  Constructors */
@@ -39,7 +39,7 @@ public:
     int getMonth() const &;
 
     /*  Other member functions */
-    std::string toString() const &;
+    std::string toString() const;
 
     bool empty() const &;
 
@@ -61,7 +61,7 @@ private:
     std::string _product = "UNSPECIFIED";
     int _month = 1;
     int _quantity = 0;
-    std::vector<std::string> _year = {"dummy","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    std::vector<std::string> _year = {"DUMMY","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 };
 
 

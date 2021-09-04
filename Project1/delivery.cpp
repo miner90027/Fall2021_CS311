@@ -8,18 +8,23 @@
 
 #include "delivery.h"
 
-    /*  Constructors */
+	/********************************************************************/
+	/**							Constructors			 			  ***/
+	/********************************************************************/
+// Default constructor
 Delivery::Delivery(): Delivery("UNSPECIFIED", 0, 1)
     {}
 
 Delivery::Delivery(std::string prdct, int qunt, int mon)
     {
-        setName(prdct);
+		setName(prdct);
         setMonth(mon);
         setQuantity(qunt);
     }
 
-    /*  Set data members */
+	/********************************************************************/
+	/**						Modify Data Members			 			  ***/
+	/********************************************************************/
 void Delivery::setName(std::string prdct){
         _product = prdct;
     }
@@ -32,7 +37,9 @@ void Delivery::setMonth(int mon){
         _month = mon;
     }
 
-    /*  Get data members */
+	/********************************************************************/
+	/***					Read Data Members			 			  ***/
+	/********************************************************************/
 std::string Delivery::getName() const &{
         return _product;
     }
@@ -45,7 +52,9 @@ int Delivery::getMonth() const &{
         return _month;
     }
 
-    /* Other member functions */
+	/********************************************************************/
+	/***					Other Member Functions		 			  ***/
+	/********************************************************************/
 std::string Delivery::toString() const{
     std::string output = getName() + " (" + std::to_string(getQuantity()) +"), " + _year[_month];
     return output;
@@ -56,7 +65,9 @@ bool Delivery::empty() const & {
     return (_quantity == 0);
 }
 
-    /*  Overloaded operators */
+	/********************************************************************/
+	/***				Overloaded Boolean Operators				  ***/
+	/********************************************************************/
 bool Delivery::operator==(const Delivery &d2) const{
     return (this->getMonth() == d2.getMonth() && this->getQuantity() == d2.getQuantity() && this->getName() == d2.getName());
 }
@@ -65,6 +76,10 @@ bool Delivery::operator!=(const Delivery &d2) const{
 
     return !(*this == d2);
 }
+
+	/********************************************************************/
+	/***			 Overloaded Mathematical Operators		 		  ***/
+	/********************************************************************/
 
 Delivery &Delivery::operator++() {
 	this->setQuantity(this->getQuantity() +1);
@@ -89,7 +104,9 @@ Delivery Delivery::operator--([[maybe_unused]]int dummy){
 	return save;
 }
 
-	/* Global overloaded operators */
+	/********************************************************************/
+	/**					Global Overloaded Operators		 			  ***/
+	/********************************************************************/
 std::ostream &operator<<(std::ostream &os, const Delivery &dliv){
 	os << dliv.toString();
     return os;

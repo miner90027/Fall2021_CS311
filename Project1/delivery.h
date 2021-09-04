@@ -33,7 +33,7 @@ public:
 
 	//constructor that takes 3 parameters
 	// takes in the  product name, amount, and month of delivery
-    Delivery(std::string prdct, int qunt, int mon);
+    Delivery(const std::string& prdct, int qunt, int mon);
 
 	/********************************************************************/
 	/**						Modify Data Members			 			  ***/
@@ -41,7 +41,7 @@ public:
 
 	//setName
 	//sets the product name to the string passed
-    void setName(std::string prdct);
+    void setName(const std::string& prdct);
 
 	//setQuantity
 	//sets the amount of product to the int passed so long as it is positive
@@ -58,15 +58,15 @@ public:
 
 	//getName
 	//returns the product name as a string
-    std::string getName() const &;
+    [[nodiscard]] std::string getName() const &;
 
 	//getQuantity
 	//returns the amount of product as an int
-    int getQuantity() const &;
+    [[nodiscard]] int getQuantity() const &;
 
 	//getMonth
 	//returns the month of delivery as an int
-    int getMonth() const &;
+    [[nodiscard]] int getMonth() const &;
 
 	/********************************************************************/
 	/***					Other Member Functions		 			  ***/
@@ -75,11 +75,11 @@ public:
 	//toStirng
 	//converts the data stored in a Delivery object into a readable string
 	//formatted as such: _product (_quantity), _month of the year
-    std::string toString() const;
+    [[nodiscard]] std::string toString() const;
 
 	//empty
 	// returns true if the quantity is zero and false if otherwise
-    bool empty() const &;
+    [[nodiscard]] bool empty() const &;
 
 	/********************************************************************/
 	/***				Overloaded Boolean Operators				  ***/

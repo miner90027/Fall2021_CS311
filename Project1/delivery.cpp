@@ -18,7 +18,7 @@ Delivery::Delivery(): Delivery("UNSPECIFIED", 0, 1)
 
 //constructor that takes 3 parameters
 // takes in the  product name, amount, and month of delivery
-Delivery::Delivery(std::string prdct, int qunt, int mon)
+Delivery::Delivery(const std::string& prdct, int qunt, int mon)
     {
 		assert(qunt >= 0);
 		assert(mon >= 1 && mon <= 12);
@@ -33,7 +33,7 @@ Delivery::Delivery(std::string prdct, int qunt, int mon)
 
 //setName
 //sets the product name to the string passed
-void Delivery::setName(std::string prdct){
+void Delivery::setName(const std::string& prdct){
         _product = prdct;
     }
 

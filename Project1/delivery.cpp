@@ -67,16 +67,19 @@ bool Delivery::operator!=(const Delivery &d2) const{
 }
 
 Delivery &Delivery::operator++() {
+	this->setQuantity(this->getQuantity() +1);
 	return *this;
 }
 
 Delivery &Delivery::operator--() {
+	if(this->getQuantity() > 0)
+		this->setQuantity(this->getQuantity() -1);
 	return *this;
 }
 
 Delivery Delivery::operator++([[maybe_unused]]int dummy){
 	auto save = *this;
-	--(*this);
+	++(*this);
 	return save;
 }
 

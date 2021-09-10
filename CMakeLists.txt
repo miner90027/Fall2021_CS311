@@ -11,5 +11,5 @@ add_subdirectory(Project1)
 add_subdirectory(Project2)
 
 #all of the executable files
-add_executable(GlobeProject2 Project2/main2.cpp)
 add_executable(GlobeProject1 Project1/delivery_test.cpp Project1/delivery.cpp Project1/delivery.h)
+add_executable(GlobeProject2 Project2/ssarray_test.cpp Project2/ssarray.h)

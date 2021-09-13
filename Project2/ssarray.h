@@ -26,6 +26,9 @@ public:
 
     explicit SSArray(std::size_t size, Type value);
 
+
+    std::size_t size();
+
 private:
     std::size_t _size;
 };
@@ -44,5 +47,9 @@ SSArray<Type>::SSArray(std::size_t size, Type value):_size(size) {
 
 }
 
+template<typename Type>
+std::size_t SSArray<Type>::size() {
+    return _size;
+}
 
 #endif //FALL2021_CS311_SSARRAY_H

@@ -31,6 +31,7 @@ public:
 
 private:
     std::size_t _size;
+    Type _value;
 };
 
 

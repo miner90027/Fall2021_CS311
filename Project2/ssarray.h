@@ -22,6 +22,10 @@ class SSArray{
 public:
     SSArray();
 
+    explicit SSArray(std::size_t size);
+
+    explicit SSArray(std::size_t size, Type value);
+
 private:
     std::size_t _size;
 };
@@ -29,6 +33,16 @@ private:
 
 template<typename Type>
 SSArray<Type>::SSArray():_size(8) {}
+
+template<typename Type>
+SSArray<Type>::SSArray(std::size_t size):_size(size) {
+
+}
+
+template<typename Type>
+SSArray<Type>::SSArray(std::size_t size, Type value):_size(size) {
+
+}
 
 
 #endif //FALL2021_CS311_SSARRAY_H

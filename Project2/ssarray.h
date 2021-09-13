@@ -13,12 +13,22 @@
 #include <ostream> // for std::ostream
 
 /* Class Invariants:
+ * _size >= 0
  *
  */
 
 template<typename Type>
 class SSArray{
+public:
+    SSArray();
 
+private:
+    std::size_t _size;
 };
+
+
+template<typename Type>
+SSArray<Type>::SSArray():_size(8) {}
+
 
 #endif //FALL2021_CS311_SSARRAY_H

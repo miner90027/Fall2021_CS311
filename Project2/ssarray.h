@@ -4,6 +4,7 @@
  * 2021/09/10
  * Fall 2021 CS 311
  * The header file for a somewhat smart array template class
+ * 		No source file - template class
  */
 
 #ifndef FALL2021_CS311_SSARRAY_H
@@ -13,7 +14,7 @@
 #include <ostream> // for std::ostream
 
 /* Class Invariants:
- * _size >= 0
+ * size_type >= 0
  *
  */
 
@@ -26,31 +27,52 @@ public:
 
     explicit SSArray(std::size_t size, Type value);
 
+	~SSArray();
 
     std::size_t size();
+	std::size_t* begin();
+	std::size_t* end();
+
+	Type value_type;
+    std::size_t size_type;
 
 private:
-    std::size_t _size;
-    Type _value;
+	Type _array;
 };
 
 
 template<typename Type>
-SSArray<Type>::SSArray():_size(8) {}
+SSArray<Type>::SSArray():SSArray(8) {}
 
 template<typename Type>
-SSArray<Type>::SSArray(std::size_t size):_size(size) {
-
+SSArray<Type>::SSArray(std::size_t size):size_type(size) {
+	_array = new Type[size_type];
 }
 
 template<typename Type>
-SSArray<Type>::SSArray(std::size_t size, Type value):_size(size) {
-
+SSArray<Type>::SSArray(std::size_t size, Type value):size_type(size) {
+	_array = new Type[size_type][value];
 }
+
+template<typename Type>
+SSArray<Type>::~SSArray() {
+	delete[] _array;
+}
+
 
 template<typename Type>
 std::size_t SSArray<Type>::size() {
-    return _size;
+    return size_type;
+}
+
+template<typename Type>
+std::size_t *SSArray<Type>::begin() {
+	return &_array;
+}
+
+template<typename Type>
+std::size_t *SSArray<Type>::end() {
+	return &size_type;
 }
 
 #endif //FALL2021_CS311_SSARRAY_H

@@ -20,6 +20,12 @@
 
 template<typename Type>
 class SSArray{
+
+	template<typename Type>
+	friend bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs);
+	template<typename Type>
+	friend bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs);
+	
 public:
     SSArray();
 
@@ -34,7 +40,7 @@ public:
 	std::size_t* end();
 
 	Type value_type;
-    std::size_t size_type;
+    std::size_t size_type{};
 
 private:
 	Type _array;
@@ -73,6 +79,36 @@ std::size_t *SSArray<Type>::begin() {
 template<typename Type>
 std::size_t *SSArray<Type>::end() {
 	return &size_type;
+}
+
+template<typename Type>
+bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return false;
+}
+
+template<typename Type>
+bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return false;
+}
+
+template<typename Type>
+bool operator!=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return !(rhs == lhs);
+}
+
+template<typename Type>
+bool operator>(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return rhs<lhs;
+}
+
+template<typename Type>
+bool operator<=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return ! (rhs>lhs);
+}
+
+template<typename Type>
+bool operator>=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
+	return ! (rhs<lhs);
 }
 
 #endif //FALL2021_CS311_SSARRAY_H

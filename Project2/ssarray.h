@@ -39,6 +39,8 @@ public:
 	std::size_t* begin();
 	std::size_t* end();
 
+    Type& operator[](const int location);
+
 	Type value_type;
     std::size_t size_type{};
 
@@ -56,8 +58,13 @@ SSArray<Type>::SSArray(std::size_t size):size_type(size) {
 }
 
 template<typename Type>
-SSArray<Type>::SSArray(std::size_t size, Type value):size_type(size) {
-	_array = new Type[size_type][value];
+SSArray<Type>::SSArray(std::size_t size, Type value):size_type(size){
+
+    _array = new Type[size_type];
+    for(int i = 0; i < size_type; ++i){
+        _array[i] = value;
+    }
+
 }
 
 template<typename Type>
@@ -90,6 +97,14 @@ template<typename Type>
 bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return false;
 }
+
+template<typename Type>
+Type &SSArray<Type>::operator[](const int location) {
+    return _array[location];
+}
+
+
+
 
 template<typename Type>
 bool operator!=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {

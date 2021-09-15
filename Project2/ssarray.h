@@ -33,9 +33,17 @@ public:
 
     explicit SSArray(std::size_t size, Type value);
 
+    SSArray(const SSArray & other);
+
+    SSArray & operator=(const SSArray & rhs);
+
+    SSArray(SSArray && other);
+
+    SSArray & operator=(SSArray && other);
+
 	~SSArray();
 
-    std::size_t size();
+    const std::size_t size();
 	std::size_t* begin();
 	std::size_t* end();
 
@@ -75,7 +83,7 @@ SSArray<Type>::~SSArray() {
 
 
 template<typename Type>
-std::size_t SSArray<Type>::size() {
+const std::size_t SSArray<Type>::size() {
     return _size;
 }
 
@@ -104,7 +112,27 @@ Type &SSArray<Type>::operator[](const int location) {
     return _array[location];
 }
 
+template<typename Type>
+SSArray<Type>::SSArray(const SSArray &other):SSArray(other.size()) {
+    for(int i = 0; i < _size; ++i){
+        _array[i] = other[i];
+    }
+}
 
+template<typename Type>
+SSArray<Type> &SSArray<Type>::operator=(const SSArray &rhs) {
+    return *this;
+}
+
+template<typename Type>
+SSArray<Type>::SSArray(SSArray &&other) {
+
+}
+
+template<typename Type>
+SSArray<Type> &SSArray<Type>::operator=(SSArray &&other) {
+    return *this;
+}
 
 
 template<typename Type>

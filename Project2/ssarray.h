@@ -14,7 +14,7 @@
 #include <ostream> // for std::ostream
 
 /* Class Invariants:
- * size_type >= 0
+ * _size >= 0
  *
  */
 
@@ -39,13 +39,14 @@ public:
 	std::size_t* begin();
 	std::size_t* end();
 
-    Type& operator[](const int location);
+    Type& operator[](int location);
 
-	Type value_type;
-    std::size_t size_type{};
+    using size_type = std::size_t;
+    using value_type = Type;
 
 private:
 	Type* _array;
+    std::size_t _size;
 };
 
 
@@ -53,15 +54,15 @@ template<typename Type>
 SSArray<Type>::SSArray():SSArray(8) {}
 
 template<typename Type>
-SSArray<Type>::SSArray(std::size_t size):size_type(size) {
-	_array = new Type[size_type];
+SSArray<Type>::SSArray(std::size_t size):_size(size) {
+	_array = new Type[_size];
 }
 
 template<typename Type>
-SSArray<Type>::SSArray(std::size_t size, Type value):size_type(size){
+SSArray<Type>::SSArray(std::size_t size, Type value):_size(size){
 
-    _array = new Type[size_type];
-    for(int i = 0; i < size_type; ++i){
+    _array = new Type[_size];
+    for(int i = 0; i < _size; ++i){
         _array[i] = value;
     }
 
@@ -75,17 +76,17 @@ SSArray<Type>::~SSArray() {
 
 template<typename Type>
 std::size_t SSArray<Type>::size() {
-    return size_type;
+    return _size;
 }
 
 template<typename Type>
 std::size_t *SSArray<Type>::begin() {
-	return &_array;
+	return *_array[0];
 }
 
 template<typename Type>
 std::size_t *SSArray<Type>::end() {
-	return &size_type;
+	return *_array[_size];
 }
 
 template<typename Type>

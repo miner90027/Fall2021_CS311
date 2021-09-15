@@ -43,7 +43,7 @@ public:
     std::size_t size_type{};
 
 private:
-	Type _array;
+	Type* _array;
 };
 
 

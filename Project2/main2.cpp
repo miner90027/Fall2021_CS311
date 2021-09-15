@@ -2,8 +2,9 @@
 // Created by aleks on 08/29/21.
 //
 #include <iostream>
+#include "ssarray.h"
 
 int main() {
-	std::cout << "Hello, World!" << std::endl;
+	SSArray<int> def;
 	return 0;
 }

@@ -5,6 +5,6 @@
 #include "ssarray.h"
 
 int main() {
-	SSArray<int> def;
-	return 0;
+	SSArray<int> def(5, 20);
+	return def[0];
 }

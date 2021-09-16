@@ -37,24 +37,24 @@ public:
 
     SSArray & operator=(const SSArray & rhs);
 
-    SSArray(SSArray && other);
+    SSArray(SSArray && other) noexcept ;
 
-    SSArray & operator=(SSArray && other);
+    SSArray & operator=(SSArray && other) noexcept ;
 
 	~SSArray();
 
-    const std::size_t size();
-	std::size_t* begin();
-	std::size_t* end();
+    std::size_t size() const &;
+	Type* begin()const &;
+	Type* end() const &;
 
-    Type& operator[](int location);
+    Type& operator[](int location) const;
 
     using size_type = std::size_t;
     using value_type = Type;
 
 private:
 	Type* _array;
-    std::size_t _size;
+    std::size_t _size{};
 };
 
 
@@ -83,18 +83,18 @@ SSArray<Type>::~SSArray() {
 
 
 template<typename Type>
-const std::size_t SSArray<Type>::size() {
+std::size_t SSArray<Type>::size() const &{
     return _size;
 }
 
 template<typename Type>
-std::size_t *SSArray<Type>::begin() {
-	return *_array[0];
+Type *SSArray<Type>::begin() const &{
+	return &_array[0];
 }
 
 template<typename Type>
-std::size_t *SSArray<Type>::end() {
-	return *_array[_size];
+Type *SSArray<Type>::end() const &{
+	return &_array[_size];
 }
 
 template<typename Type>
@@ -108,12 +108,13 @@ bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 }
 
 template<typename Type>
-Type &SSArray<Type>::operator[](const int location) {
+Type &SSArray<Type>::operator[](const int location) const{
     return _array[location];
 }
 
 template<typename Type>
-SSArray<Type>::SSArray(const SSArray &other):SSArray(other.size()) {
+SSArray<Type>::SSArray(const SSArray &other){
+    _size = other.size();
     for(int i = 0; i < _size; ++i){
         _array[i] = other[i];
     }
@@ -125,12 +126,12 @@ SSArray<Type> &SSArray<Type>::operator=(const SSArray &rhs) {
 }
 
 template<typename Type>
-SSArray<Type>::SSArray(SSArray &&other) {
+SSArray<Type>::SSArray(SSArray &&other) noexcept {
 
 }
 
 template<typename Type>
-SSArray<Type> &SSArray<Type>::operator=(SSArray &&other) {
+SSArray<Type> &SSArray<Type>::operator=(SSArray &&other) noexcept {
     return *this;
 }
 

@@ -4,7 +4,6 @@
  * 2021/09/10
  * Fall 2021 CS 311
  * The header file for a somewhat smart array template class
- * 		No source file - template class
  */
 
 #ifndef FALL2021_CS311_SSARRAY_H
@@ -16,17 +15,26 @@
 #include <algorithm> // for std::swap
 
 /* Class Invariants:
- * _size > 0
- * _array is a valid ptr
+ * _size >= 0
+ * _array is a valid ptr that can be deleted
  */
 
 template<typename Type>
 class SSArray{
-
 public:
+	/******************************************/
+	/***         Public Member Types        ***/
+	/******************************************/
 
+	// member type for the size
 	using size_type = std::size_t;
+
+	//member type for the data type
 	using value_type = Type;
+
+	/******************************************/
+	/***         Basic Constructors         ***/
+	/******************************************/
 
 	// default cotr
     SSArray():SSArray(8){}
@@ -44,6 +52,11 @@ public:
 		}
 	}
 
+	/******************************************/
+	/***            The Big Five:           ***/
+	/***      Move & Copy Ctors & Dctor     ***/
+	/******************************************/
+
 	// copy ctor
     SSArray(const SSArray<Type> & other){
 		_size = other.size();
@@ -58,7 +71,7 @@ public:
 		return *this;
 	}
 
-	//move ctor
+	// move ctor
     SSArray(SSArray<Type> && other) noexcept  {
 		_size = other._size;
 		_array = other._array;
@@ -78,42 +91,88 @@ public:
 		delete[] _array;
 	}
 
+	/******************************************/
+	/***      Public Member Functions       ***/
+	/******************************************/
+
+	// size()
+	// returns the size of the object
     [[nodiscard]] size_type size() const &{
 		return _size;
 	}
 
+	// operator[]
+	// returns the value in the array at the specified location
+	// Precondition:
+	// 	- location must be a value between 0 & size - 1
+	Type& operator[](int location) const{
+		return _array[location];
+	}
+
+	/******************************************/
+	/***     Iterator Member Functions      ***/
+	/******************************************/
+
+	// begin()
+	// returns a pointer to the beginning of the array
 	Type* begin(){
 		return _array;
 	}
 
+	// end()
+	// returns a pointer to the end of the array
 	Type* end(){
 		return _array + _size;
 	}
 
+	// const begin()
+	// returns a pointer to the beginning of the array
+	// can be used with const objects
 	const Type* begin() const {
 		return _array;
 	}
 
+	// const end()
+	// returns a pointer to the end of the array
+	// can be used with const objects
 	const Type* end() const{
 		return _array + _size;
 	}
 
-    Type& operator[](int location) const{
-		return _array[location];
-	}
-
 private:
 
+	/******************************************/
+	/***      Private Member Functions      ***/
+	/******************************************/
+
+	// mswap()
+	// used to swap the values for 2 SSArray objects
+	// Not visible to the client code
 	void mswap(SSArray<Type> & other) noexcept{
 		std::swap(_array, other._array);
 		std::swap(_size, other._size);
 	}
 
+	/******************************************/
+	/***      Private Member Variables      ***/
+	/******************************************/
+
+	// stores the pointer to the beginning of the array
 	Type* _array;
-    size_type _size{};
+
+	// stores the size of the array
+    size_type _size;
 };
 
+/******************************************/
+/***     Global Boolean Operators       ***/
+/******************************************/
 
+// operator==
+// returns true when all items in SSArray objects are equal
+// and their size is equal
+// Preconditions:
+//  - Both objects must be of the same type
 template<typename Type>
 bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
     bool ret = lhs.size()== rhs.size();
@@ -123,6 +182,11 @@ bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
     return ret;
 }
 
+// operator<
+// returns true when all items in the first SSArray object is
+//  less than the other or if the size of the first object is < the other
+//	Preconditions:
+//   - Both objects must be of the same type
 template<typename Type>
 bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	for(std::size_t i = 0; i < rhs.size() && i < lhs.size() ; ++i)
@@ -134,21 +198,41 @@ bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return rhs.size() > lhs.size();
 }
 
+
+// operator!=
+// returns the opposite of operator==
+// Preconditions:
+//  - Both objects must be of the same type
 template<typename Type>
 bool operator!=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return !(rhs == lhs);
 }
 
+
+// operator>
+// returns the opposite of operator<
+// Preconditions:
+//  - Both objects must be of the same type
 template<typename Type>
 bool operator>(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return rhs < lhs;
 }
 
+
+// operator<=
+// returns true if the first object isn't greater than the second
+// Preconditions:
+//  - Both objects must be of the same type
 template<typename Type>
 bool operator<=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return !(lhs > rhs);
 }
 
+
+// operator>=
+// returns true if the first object isn't less than the second
+// Preconditions:
+//  - Both objects must be of the same type
 template<typename Type>
 bool operator>=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return !(lhs < rhs);

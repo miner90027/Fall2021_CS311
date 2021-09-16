@@ -113,7 +113,12 @@ bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 
 template<typename Type>
 bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return false;
+    bool ret = true;
+    for(int i = 0; ret && i < lhs.size() ; ++i)
+    {
+        ret = (lhs[i] < rhs[i]);
+    }
+    return ret;
 }
 
 template<typename Type>
@@ -157,12 +162,12 @@ bool operator>(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 
 template<typename Type>
 bool operator<=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return ! (rhs>lhs);
+	return !(rhs<lhs);
 }
 
 template<typename Type>
 bool operator>=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return ! (rhs<lhs);
+	return ! (rhs>lhs);
 }
 
 #endif //FALL2021_CS311_SSARRAY_H

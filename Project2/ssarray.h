@@ -204,7 +204,6 @@ bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return rhs.size() > lhs.size();
 }
 
-
 // operator!=
 // returns the opposite of operator==
 // Preconditions:
@@ -213,7 +212,6 @@ template<typename Type>
 bool operator!=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return !(rhs == lhs);
 }
-
 
 // operator>
 // returns the opposite of operator<
@@ -224,7 +222,6 @@ bool operator>(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return rhs < lhs;
 }
 
-
 // operator<=
 // returns true if the first object isn't greater than the second
 // Preconditions:
@@ -233,7 +230,6 @@ template<typename Type>
 bool operator<=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 	return !(lhs > rhs);
 }
-
 
 // operator>=
 // returns true if the first object isn't less than the second

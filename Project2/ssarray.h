@@ -99,16 +99,11 @@ Type *SSArray<Type>::end() const &{
 
 template<typename Type>
 bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-    if( lhs.size()== rhs.size()) {
-        for (int i = 0; i < lhs.size(); ++i) {
-            if (lhs[i] != rhs[i]) {
-                return false;
-            }
-        }
+    bool ret = lhs.size()== rhs.size();
+    for (int i = 0;ret && i < lhs.size(); ++i) {
+            ret = (lhs[i] == rhs[i]);
     }
-    else
-        return false;
-    return true;
+    return ret;
 }
 
 template<typename Type>

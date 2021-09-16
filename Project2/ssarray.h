@@ -10,8 +10,10 @@
 #ifndef FALL2021_CS311_SSARRAY_H
 #define FALL2021_CS311_SSARRAY_H
 
-#include <cassert> // for assert
-#include <ostream> // for std::ostream
+#include <cassert>   // for assert
+#include <cstddef>   // for std::size_t
+#include <utility>   // for std::copy
+#include <algorithm> // for std::swap
 
 /* Class Invariants:
  * _size >= 0
@@ -22,16 +24,20 @@ template<typename Type>
 class SSArray{
 
 public:
+
+	using size_type = std::size_t;
+	using value_type = Type;
+
 	// default cotr
     SSArray():SSArray(8){}
 
 	// ctor that takes a size param
-    explicit SSArray(std::size_t size):_size(size) {
+    explicit SSArray(size_type size):_size(size) {
 		_array = new Type[_size];
 	}
 
 	// ctor that takes a size & value
-    explicit SSArray(std::size_t size, Type value):_size(size){
+    explicit SSArray(size_type size, Type value):_size(size){
 		_array = new Type[_size];
 		for(int i = 0; i < _size; ++i){
 			_array[i] = value;
@@ -39,26 +45,31 @@ public:
 	}
 
 	// copy ctor
-    SSArray(const SSArray & other){
+    SSArray(const SSArray<Type> & other){
 		_size = other.size();
 		_array = new Type[_size];
-		for(int i = 0; i < _size; ++i){
-			_array[i] = other[i];
-		}
+		std::copy(other.begin(), other.end(), begin());
 	}
 
 	// copy assignment operator
-    SSArray & operator=(const SSArray & rhs){
+    SSArray & operator=(const SSArray<Type> & rhs){
+		SSArray<Type> rhsCopy(rhs);
+		mswap(rhsCopy);
 		return *this;
 	}
 
 	//move ctor
-    SSArray(SSArray && other) noexcept  {
+    SSArray(SSArray<Type> && other) noexcept  {
+		_size = other._size;
+		_array = other._array;
 
+		other._size = 0;
+		other._array = nullptr;
 	}
 
 	// move assignment operator
-    SSArray & operator=(SSArray && other) noexcept{
+    SSArray & operator=(SSArray<Type> && rhs) noexcept{
+		mswap(rhs);
 		return *this;
 	}
 
@@ -67,7 +78,7 @@ public:
 		delete[] _array;
 	}
 
-    std::size_t size() const &{
+    [[nodiscard]] size_type size() const &{
 		return _size;
 	}
 	Type* begin()const &{
@@ -81,12 +92,15 @@ public:
 		return _array[location];
 	}
 
-    using size_type = std::size_t;
-    using value_type = Type;
-
 private:
+
+	void mswap(SSArray<Type> & other) noexcept{
+		std::swap(_array, other._array);
+		std::swap(_size, other._size);
+	}
+
 	Type* _array;
-    std::size_t _size{};
+    size_type _size{};
 };
 
 

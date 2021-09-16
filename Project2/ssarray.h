@@ -16,8 +16,8 @@
 #include <algorithm> // for std::swap
 
 /* Class Invariants:
- * _size >= 0
- *
+ * _size > 0
+ * _array is a valid ptr
  */
 
 template<typename Type>
@@ -81,11 +81,21 @@ public:
     [[nodiscard]] size_type size() const &{
 		return _size;
 	}
-	Type* begin()const &{
-		return &_array[0];
+
+	Type* begin(){
+		return _array;
 	}
-	Type* end() const &{
-		return &_array[_size];
+
+	Type* end(){
+		return _array + _size;
+	}
+
+	const Type* begin() const {
+		return _array;
+	}
+
+	const Type* end() const{
+		return _array + _size;
 	}
 
     Type& operator[](int location) const{
@@ -107,7 +117,7 @@ private:
 template<typename Type>
 bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
     bool ret = lhs.size()== rhs.size();
-    for (int i = 0;ret && i < lhs.size(); ++i) {
+    for (std::size_t i = 0;ret && i < lhs.size(); ++i) {
             ret = (lhs[i] == rhs[i]);
     }
     return ret;
@@ -115,12 +125,13 @@ bool operator==(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 
 template<typename Type>
 bool operator<(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-    bool ret = true;
-    for(int i = 0; ret && i < lhs.size() ; ++i)
-    {
-        ret = (lhs[i] < rhs[i]);
-    }
-    return ret;
+	for(std::size_t i = 0; i < rhs.size() && i < lhs.size() ; ++i)
+	{
+		if(lhs[i] < rhs[i]) return true;
+		else if (rhs[i] < lhs[i]) return false;
+	}
+
+	return rhs.size() > lhs.size();
 }
 
 template<typename Type>
@@ -130,17 +141,17 @@ bool operator!=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
 
 template<typename Type>
 bool operator>(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return rhs<lhs;
+	return rhs < lhs;
 }
 
 template<typename Type>
 bool operator<=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return !(rhs<lhs);
+	return !(lhs > rhs);
 }
 
 template<typename Type>
 bool operator>=(const SSArray<Type> &lhs, const SSArray<Type> &rhs) {
-	return ! (rhs>lhs);
+	return !(lhs < rhs);
 }
 
 #endif //FALL2021_CS311_SSARRAY_H

@@ -9,7 +9,9 @@ set(CMAKE_CXX_STANDARD 17)
 #all of the subdirectories
 add_subdirectory(Project1)
 add_subdirectory(Project2)
+add_subdirectory(Project3)
 
 #all of the executable files
 add_executable(GlobeProject1 Project1/delivery_test.cpp Project1/delivery.cpp Project1/delivery.h)
 add_executable(GlobeProject2 Project2/ssarray_test.cpp Project2/ssarray.h)
+add_executable(GlobeProject3 Project3/main3.cpp)

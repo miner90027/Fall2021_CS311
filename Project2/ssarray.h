@@ -14,7 +14,8 @@
 #include <utility>   // for std::copy
 #include <algorithm> // for std::swap
 
-/* Class Invariants:
+/*
+ * Class Invariants:
  * _size >= 0
  * _array is a valid ptr that can be deleted
  */
@@ -41,11 +42,13 @@ public:
 
 	// ctor that takes a size param
     explicit SSArray(size_type size):_size(size) {
+		assert(_size >= 0);
 		_array = new Type[_size];
 	}
 
 	// ctor that takes a size & value
     explicit SSArray(size_type size, Type value):_size(size){
+		assert(_size >= 0);
 		_array = new Type[_size];
 		for(int i = 0; i < _size; ++i){
 			_array[i] = value;
@@ -59,6 +62,7 @@ public:
 
 	// copy ctor
     SSArray(const SSArray<Type> & other){
+		assert(_size >= 0);
 		_size = other.size();
 		_array = new Type[_size];
 		std::copy(other.begin(), other.end(), begin());
@@ -73,6 +77,7 @@ public:
 
 	// move ctor
     SSArray(SSArray<Type> && other) noexcept  {
+		assert(_size >= 0);
 		_size = other._size;
 		_array = other._array;
 
@@ -106,6 +111,7 @@ public:
 	// Precondition:
 	// 	- location must be a value between 0 & size - 1
 	Type& operator[](int location) const{
+		assert(location >= 0 && location < _size);
 		return _array[location];
 	}
 
@@ -146,7 +152,7 @@ private:
 	/******************************************/
 
 	// mswap()
-	// used to swap the values for 2 SSArray objects
+	// used to swap the member variables for 2 SSArray objects
 	// Not visible to the client code
 	void mswap(SSArray<Type> & other) noexcept{
 		std::swap(_array, other._array);

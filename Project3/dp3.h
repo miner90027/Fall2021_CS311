@@ -1,9 +1,9 @@
 /*
- * dp3.cpp
+ * dp3.h
  * Aleks McCormick
  * 202/09/17
  * Fall 2021 CS 311
- * Source file for Project 3 functions
+ * Header file for Project 3 functions
  */
 
 #ifndef FALL2021_CS311_DP3_H

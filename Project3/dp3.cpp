@@ -17,6 +17,13 @@ void didItThrow(const function<void()> & ff, bool & threw) {
 
 
 int gcd(int a, int b) {
-    return 42;  // Dummy return
-    // TODO: WRITE THIS!!!
+    // bse case
+    if (a == 0)
+        return b;
+    // check if a > b & run again swapping values
+    if(a > b)
+        return gcd(b,a);
+
+    // return the remainder of b/a and a
+    return gcd(b % a, a);
 }

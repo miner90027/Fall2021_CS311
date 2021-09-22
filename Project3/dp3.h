@@ -12,12 +12,32 @@
 #include "llnode.h"    // For LLNode
 #include <cstddef>     // For std::size_t
 #include <functional>  // For std::function
+#include <stdexcept>   // For std::out_of_range
 
 
 template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> * head, std::size_t index){
-    return ValueType();  // Dummy return
-    // TODO: WRITE THIS!!!
+
+    if(head->_next == nullptr)
+        throw std::out_of_range("The given LLNode is empty.");
+
+    std::size_t size = 0;
+    auto* temp = head->_next;
+
+    while(temp != nullptr){
+        ++size;
+        temp = temp->_next;
+    }
+
+    if(index < 0 || index > size)
+        throw std::out_of_range("The given index is not within the range of the LLNode.");
+
+
+    for(int i = 0; i <= index; ++i){
+        head = head->_next;
+    }
+
+    return head->_data; // Dummy return
 }
 
 

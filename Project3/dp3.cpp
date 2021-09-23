@@ -14,6 +14,8 @@
 // Used to determine if a function passed to it trows an exception
 // Sets a passed bool variable accordingly
 // Re-throws the error that the passed function throws
+// Preconditions:
+//  * ff is a valid function that can be called without parameters
 void didItThrow(const std::function<void()> & ff, bool & threw) {
 	try{
 		// set the bool to false

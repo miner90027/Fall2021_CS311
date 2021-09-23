@@ -19,23 +19,23 @@
 template <typename ValueType>
 ValueType lookup(const LLNode<ValueType> * head, std::size_t index){
 
-	auto* temp = head->_next;
-
     if(!head) {
 		throw std::out_of_range("The given LLNode is empty.");
 	}
 
     std::size_t size = 0;
 
+	auto* temp = head->_next;
+
     while(temp) {
-		++size;
 		temp = temp->_next;
+		++size;
 	}
 
     if(index < 0 || index > size)
         throw std::out_of_range("The given index is not within the range of the LLNode.");
 
-    for(int i = 0; i < index; ++i){
+    for(std::size_t i = 0; head && i < index; ++i){
         head = head->_next;
     }
 

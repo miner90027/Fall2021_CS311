@@ -7,3 +7,7 @@
  */
 
 #include "hdtcount.h"
+
+int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y, int forbid2_x, int forbid2_y){
+return hdtCount_recurse(); // dummy return
+}

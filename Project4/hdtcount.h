@@ -11,13 +11,12 @@
 
 #include <vector> // For std::vector
 
+int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y, int forbid2_x, int forbid2_y);
+/*
 int hdtCount_recurse(){
-	return 0; // dummy return
-}
 
-std::vector<std::vector<int>> initBoard(int xParam, int yParam){
-	std::vector<std::vector<int>> board(xParam, std::vector<int>(yParam));
-	return board; // return the board
+	return 0; // dummy return
 };
+ */
 
 #endif //FALL2021_CS311_HDTCOUNT_H

@@ -12,5 +12,11 @@ int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y, int forbid2_x, 
      std::vector<std::vector<int>> board(dim_x, std::vector<int>(dim_y, 0));
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
-return 0; // dummy return
+
+return hdtCount_recurse(board, 0); // dummy return
+}
+
+
+int hdtCount_recurse(std::vector<std::vector<int>> & board, int partialSolutions){
+    return 1; // dummy return
 }

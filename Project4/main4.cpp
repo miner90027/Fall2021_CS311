@@ -2,8 +2,9 @@
 // Created by aleks on 09/16/21.
 //
 #include <iostream>
+#include "hdtcount.h"
 
 int main() {
-	std::cout << "Hello, world!" << std::endl;
-	return 0;
+
+	return hdtCount(4,3,2,0,3,2);
 }

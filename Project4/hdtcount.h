@@ -11,8 +11,9 @@
 
 #include <vector> // For std::vector
 
+using boardType = std::vector<std::vector<int>>;
 int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y, int forbid2_x, int forbid2_y);
 
-int hdtCount_recurse(std::vector<std::vector<int>> & board, int partialSolutions);
+int hdtCount_recurse(boardType & board, int partialSolutions);
 
 #endif //FALL2021_CS311_HDTCOUNT_H

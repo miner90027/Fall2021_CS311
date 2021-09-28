@@ -12,7 +12,7 @@
 #include <vector> // For std::vector
 
 using boardType = std::vector<std::vector<int>>;
-int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y, int forbid2_x, int forbid2_y);
+int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, unsigned int forbid1_y, unsigned int forbid2_x, unsigned int forbid2_y);
 
 int hdtCount_recurse(boardType & board, int partialSolutions);
 

@@ -14,6 +14,8 @@
 using boardType = std::vector<std::vector<int>>;
 int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, unsigned int forbid1_y, unsigned int forbid2_x, unsigned int forbid2_y);
 
-int hdtCount_recurse(boardType & board, int partialSolutions);
+int hdtCount_recurse(boardType & board, int partialSolutions, unsigned int squaresLeft);
+bool checkHorizontal(boardType & board, int x, int y);
+bool checkVertical(boardType & board, unsigned int x, unsigned int y);
 
 #endif //FALL2021_CS311_HDTCOUNT_H

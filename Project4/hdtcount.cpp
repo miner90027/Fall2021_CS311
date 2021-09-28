@@ -18,11 +18,11 @@ int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, uns
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
-return hdtCount_recurse(board, 0, (dim_y * dim_x) - 2); // dummy return
+return hdtCount_recurse(board, 0, 0,0,(dim_y * dim_x) - 2); // dummy return
 }
 
 
-int hdtCount_recurse(boardType & board, int partialSolutions, unsigned int squaresLeft){
+int hdtCount_recurse(boardType & board, unsigned int curr_x, unsigned int curr_y, int partialSolutions, unsigned int squaresLeft){
 
 	if(squaresLeft == 0)
 		return 1;

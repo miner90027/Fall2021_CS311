@@ -27,36 +27,26 @@ solutions){
 
 
 	if(squaresLeft == 0){
-        return solutions + 1;
+        return 1;
     }
 
-	if(checkHorizontal(board, curr_x, curr_y)){
-		squaresLeft -= 2;
-		partialSolutions = hdtCount_recurse(board, curr_x+1, curr_y, squaresLeft, partialSolutions, solutions);
-	}
+    if(checkVertical(board, curr_x, curr_y)){
+        squaresLeft -= 2;
+        partialSolutions += hdtCount_recurse(board, curr_x, curr_y+1, squaresLeft, partialSolutions, solutions);
 
-	if(checkVertical(board, curr_x, curr_y)){
-		squaresLeft -= 2;
-		partialSolutions = hdtCount_recurse(board, curr_x, curr_y+1, squaresLeft, partialSolutions, solutions);
-	}
+        if(checkHorizontal(board, curr_x, curr_y)) {
+            squaresLeft -= 2;
+            partialSolutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
+        }
+    }
 
-    return solutions; // dummy return
+    return partialSolutions; // dummy return
 }
 
 bool checkHorizontal(boardType & board, int x, int y){
-	if(x < board.size() - 1 && y < board[0].size())
-	{
-		if(board[x+1][y] == 0)
-			return true;
-	}
-	return false;
+	return (x < board.size() - 1 && y < board[0].size()) && (board[x][y] != 1 && board[x+1][y] == 0);
 }
 
 bool checkVertical(boardType & board, unsigned int x, unsigned int y){
-	if(y < board[0].size() - 1 && x < board.size())
-	{
-		if(board[x][y + 1] == 0)
-			return true;
-	}
-	return false;
+    return (y < board[0].size() - 1 && x < board.size()) && (board[x][y] != 1 && board[x][y+1] == 0);
 }

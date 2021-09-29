@@ -18,27 +18,29 @@ int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, uns
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
-return hdtCount_recurse(board, 0, 0,0,(dim_y * dim_x) - 2); // dummy return
+return hdtCount_recurse(board, 0, 0,(dim_y * dim_x) - 2); // dummy return
 }
 
 
-int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, int partialSolutions, unsigned int squaresLeft){
+int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, unsigned int squaresLeft, int partialSolutions, int
+solutions){
 
 
-	if(squaresLeft == 0)
-		return 1;
+	if(squaresLeft == 0){
+        return solutions + 1;
+    }
 
 	if(checkHorizontal(board, curr_x, curr_y)){
 		squaresLeft -= 2;
-		partialSolutions += hdtCount_recurse(board, curr_x+1, curr_y, partialSolutions, squaresLeft);
+		partialSolutions = hdtCount_recurse(board, curr_x+1, curr_y, squaresLeft, partialSolutions, solutions);
 	}
 
 	if(checkVertical(board, curr_x, curr_y)){
 		squaresLeft -= 2;
-		partialSolutions += hdtCount_recurse(board, curr_x, curr_y+1, partialSolutions, squaresLeft);
+		partialSolutions = hdtCount_recurse(board, curr_x, curr_y+1, squaresLeft, partialSolutions, solutions);
 	}
 
-    return partialSolutions; // dummy return
+    return solutions; // dummy return
 }
 
 bool checkHorizontal(boardType & board, int x, int y){

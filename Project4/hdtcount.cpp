@@ -22,11 +22,14 @@ return hdtCount_recurse(board, 0, 0,0,(dim_y * dim_x) - 2); // dummy return
 }
 
 
-int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, int partialSolutions, unsigned int squaresLeft){
+int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, int partialSolutions, unsigned int squaresLeft, int
+solutions){
 
 
-	if(squaresLeft == 0)
-		return 1;
+	if(squaresLeft == 0){
+        return solutions += 1;
+    }
+
 
 	if(checkHorizontal(board, curr_x, curr_y)){
 		squaresLeft -= 2;
@@ -38,7 +41,7 @@ int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, int partialSol
 		partialSolutions += hdtCount_recurse(board, curr_x, curr_y+1, partialSolutions, squaresLeft);
 	}
 
-    return partialSolutions; // dummy return
+    return solutions; // dummy return
 }
 
 bool checkHorizontal(boardType & board, int x, int y){

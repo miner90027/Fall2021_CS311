@@ -30,7 +30,7 @@ solutions){
         return 1;
     }
 
-	for(; curr_x < board.size()-1; ++curr_x){
+	for(; curr_y < board.size()-1; ++curr_y){
 		switch (checkDomino(board, curr_x, curr_y)) {
 			case 1:
 			case 2:
@@ -40,10 +40,7 @@ solutions){
 				squaresLeft -= 4;
 				partialSolutions += 2;
 			default:
-				if(curr_y + 1 < board[0].size()){
-					++curr_y;
-				}
-				else{
+				if(curr_x + 1 < board.size()){
 					++curr_x;
 				}
 		}

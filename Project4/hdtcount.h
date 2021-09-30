@@ -19,7 +19,7 @@ solutions = 0);
 bool checkHorizontal(boardType & board, int x, int y);
 bool checkVertical(boardType & board, int x, int y);
 
-bool checkDomino(boardType & board, int x, int y);
+int checkDomino(boardType & board, int x, int y);
 bool checkRange(boardType & board, int x, int y);
 
 #endif //FALL2021_CS311_HDTCOUNT_H

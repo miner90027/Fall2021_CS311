@@ -30,16 +30,37 @@ solutions){
         return 1;
     }
 
+	for(; curr_x < board.size()-1; ++curr_x){
+		switch (checkDomino(board, curr_x, curr_y)) {
+			case 1:
+			case 2:
+				squaresLeft -= 2;
+				++partialSolutions;
+			case 3:
+				squaresLeft -= 4;
+				partialSolutions += 2;
+			default:
+				if(curr_y + 1 < board[0].size()){
+					++curr_y;
+				}
+				else{
+					++curr_x;
+				}
+		}
+		solutions += hdtCount_recurse(board,curr_x, curr_y, squaresLeft, partialSolutions, solutions);
+	}
+
+/*
     if(checkVertical(board, curr_x, curr_y)){
         squaresLeft -= 2;
         partialSolutions += hdtCount_recurse(board, curr_x, curr_y+1, squaresLeft, partialSolutions, solutions);
 
         if(checkHorizontal(board, curr_x, curr_y)) {
             squaresLeft -= 2;
-            solutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
+            partialSolutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
         }
     }
-
+*/
     return solutions; // dummy return
 }
 
@@ -51,8 +72,15 @@ bool checkVertical(boardType & board, int x, int y){
     return checkRange(board, x, y+1) && (board[x][y] != 1 && board[x][y+1] == 0);
 }
 
-bool checkDomino(boardType & board, int x, int y) {
-	return checkHorizontal(board, x, y) || checkVertical(board, x, y);
+int checkDomino(boardType & board, int x, int y) {
+	if(checkHorizontal(board, x, y) && !checkVertical(board, x, y))
+		return 1;
+	else if(!checkHorizontal(board, x, y) && checkVertical(board, x, y))
+		return 2;
+	else if(checkHorizontal(board, x, y) && checkVertical(board, x, y))
+		return 3;
+	else
+		return 0;
 }
 
 bool checkRange(boardType & board, int x, int y){

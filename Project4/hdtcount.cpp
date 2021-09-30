@@ -23,12 +23,12 @@ return hdtCount_recurse(board, 0, 0,(dim_y * dim_x) - 2); // dummy return
 
 
 int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, unsigned int squaresLeft, int partialSolutions, int
-solutions){
+solutions) {
 
 
-	if(squaresLeft == 0){
-        return 1;
-    }
+	if (squaresLeft == 0) {
+		return solutions + 1;
+	}
 /*
 	for(; curr_y < board.size()-1; ++curr_y){
 		switch (checkDomino(board, curr_x, curr_y)) {
@@ -48,25 +48,35 @@ solutions){
 	}
 */
 
-    if(checkVertical(board, curr_x, curr_y)){
-        squaresLeft -= 2;
-        partialSolutions += hdtCount_recurse(board, curr_x, curr_y+1, squaresLeft, partialSolutions, solutions);
+	if (checkRange(board, curr_x, curr_y)) {
+		if (checkVertical(board, curr_x, curr_y)) {
+			squaresLeft -= 2;
+			++partialSolutions;
+		}
+		if (checkHorizontal(board, curr_x, curr_y)) {
+			squaresLeft -= 2;
+			++partialSolutions;
+		}
+	}
+	else{
+			return 0;
+	}
 
-        if(checkHorizontal(board, curr_x, curr_y)) {
-            squaresLeft -= 2;
-            partialSolutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
-        }
-    }
+	if(checkRange(board, curr_x, curr_y + 1))
+		solutions += hdtCount_recurse(board, curr_x, curr_y + 1, squaresLeft, partialSolutions, solutions);
+	else if(checkRange(board, curr_x +1, curr_y))
+		solutions += hdtCount_recurse(board, curr_x +1, 0, squaresLeft, partialSolutions, solutions);
 
-    return partialSolutions; // dummy return
+	return solutions; // dummy return
+
 }
 
 bool checkHorizontal(boardType & board, int x, int y){
-	return checkRange(board, x +1, y) && (board[x][y] != 1 && board[x+1][y] != 1);
+	return checkRange(board, x +1, y) && (board[x+1][y] != 1);
 }
 
 bool checkVertical(boardType & board, int x, int y){
-    return checkRange(board, x, y+1) && (board[x][y] != 1 && board[x][y+1] != 1);
+    return checkRange(board, x, y+1) && (board[x][y+1] != 1);
 }
 
 int checkDomino(boardType & board, int x, int y) {

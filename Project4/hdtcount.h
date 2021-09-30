@@ -17,6 +17,9 @@ int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, uns
 int hdtCount_recurse(boardType & board, int curr_x, int curr_y, unsigned int squaresLeft, int partialSolutions = 0, int
 solutions = 0);
 bool checkHorizontal(boardType & board, int x, int y);
-bool checkVertical(boardType & board, unsigned int x, unsigned int y);
+bool checkVertical(boardType & board, int x, int y);
+
+bool checkDomino(boardType & board, int x, int y);
+bool checkRange(boardType & board, int x, int y);
 
 #endif //FALL2021_CS311_HDTCOUNT_H

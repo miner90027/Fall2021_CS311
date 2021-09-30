@@ -36,17 +36,25 @@ solutions){
 
         if(checkHorizontal(board, curr_x, curr_y)) {
             squaresLeft -= 2;
-            partialSolutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
+            solutions += hdtCount_recurse(board, curr_x + 1, curr_y, squaresLeft, partialSolutions, solutions);
         }
     }
 
-    return partialSolutions; // dummy return
+    return solutions; // dummy return
 }
 
 bool checkHorizontal(boardType & board, int x, int y){
-	return (x < board.size() - 1 && y < board[0].size()) && (board[x][y] != 1 && board[x+1][y] == 0);
+	return checkRange(board, x +1, y) && (board[x][y] != 1 && board[x+1][y] == 0);
 }
 
-bool checkVertical(boardType & board, unsigned int x, unsigned int y){
-    return (y < board[0].size() - 1 && x < board.size()) && (board[x][y] != 1 && board[x][y+1] == 0);
+bool checkVertical(boardType & board, int x, int y){
+    return checkRange(board, x, y+1) && (board[x][y] != 1 && board[x][y+1] == 0);
+}
+
+bool checkDomino(boardType & board, int x, int y) {
+	return checkHorizontal(board, x, y) || checkVertical(board, x, y);
+}
+
+bool checkRange(boardType & board, int x, int y){
+	return (x < board.size() && y < board[0].size());
 }

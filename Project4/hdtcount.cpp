@@ -23,19 +23,19 @@
 int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
 			 int forbid2_x, int forbid2_y){
 
-	 // create the board using the x & y values given
-	 // default all spaces to 0
+     // create the board using the x & y values given
+     // default all spaces to 0
      boardType board(dim_x, std::vector<int>(dim_y, 0));
 
-	 // Set both of the forbidden spaces = to 1
+     // Set both of the forbidden spaces = to 1
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
-	 // Create a HDTCounter object
+     // Create a HDTCounter object
      // Must be done in order to call the recursive workhorse function
-	 HDTCounter a;
+     HDTCounter a;
 
-	 //call and return the value returned by the workhorse function
+     //call and return the value returned by the workhorse function
     return a.hdtCount_recurse(board,(dim_y * dim_x) - 2);
 }
 
@@ -57,12 +57,12 @@ int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
     // Base case
     // if the number of squares remaining is 0
     //   then return 1
-	if (squaresLeft == 0){
-		return 1;
-	}
+    if (squaresLeft == 0){
+        return 1;
+    }
 
     // initialize the solutions to zero
-	int solutions = 0;
+    int solutions = 0;
 
     //iterate through all the values in the board
     for(unsigned int x = 0; x < board.size(); ++x) {
@@ -113,7 +113,7 @@ int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
     }
 
     // Return the total number of full solutions
-	return solutions;
+    return solutions;
 }
 
 // checkHorizontal()

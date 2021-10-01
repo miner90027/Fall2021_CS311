@@ -61,24 +61,24 @@ public:
 	/***     Private Member Functions       ***/
 	/******************************************/
 private:
-	// hdtCount_recurse()
-	// Recursive workhorse function for hdtCount()
-	// Returns the total number of possible solutions for a given board
+    // hdtCount_recurse()
+    // Recursive workhorse function for hdtCount()
+    // Returns the total number of possible solutions for a given board
     // Not visible to client code
-	// Function does not throw
-	// Preconditions:
-	//		Board must be a valid 2D vector of ints
+    // Function does not throw
+    // Preconditions:
+    //		Board must be a valid 2D vector of ints
     //		Squares left must be a value between 0 & the total number of squares
     //         that can be held in the board - the 2 forbidden spaces
 	int hdtCount_recurse(boardType & board, int squaresLeft);
 
-	// checkHorizontal()
-	// Returns true if a domino can be placed horizontally on the given board at the given
-	//  coordinates
+    // checkHorizontal()
+    // Returns true if a domino can be placed horizontally on the given board at the given
+    //  coordinates
     // Not visible to client code
-	// Function does not throw
-	// Preconditions:
-	//		board must be a valid boardType
+    // Function does not throw
+    // Preconditions:
+    //		board must be a valid boardType
 	static bool checkHorizontal(const boardType & board, unsigned int x,unsigned int y);
 
     // checkVertical()

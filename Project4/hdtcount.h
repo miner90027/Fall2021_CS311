@@ -31,8 +31,8 @@ public:
 	// Function does not throw
 	// Preconditions:
 	//  	both dim_x & dim_y must be >= 1
-	//   	all the forbid_x variables must fall within the values between 0 & x
-	//   	all the forbid_y variables must fall within the values between 0 & y
+	//  	all the forbid_x variables must fall within the values between 0 & x
+	//  	all the forbid_y variables must fall within the values between 0 & y
 	friend int hdtCount(int dim_x, int dim_y, int forbid1_x,
 						int forbid1_y, int forbid2_x, int forbid2_y);
 
@@ -67,9 +67,9 @@ private:
     // Not visible to client code
     // Function does not throw
     // Preconditions:
-    //		Board must be a valid 2D vector of ints
-    //		Squares left must be a value between 0 & the total number of squares
-    //		   that can be held in the board - the 2 forbidden spaces
+    //  	Board must be a valid 2D vector of ints
+    //  	Squares left must be a value between 0 & the total number of squares
+    //  	   that can be held in the board - the 2 forbidden spaces
 	int hdtCount_recurse(boardType & board, int squaresLeft);
 
     // checkHorizontal()
@@ -78,7 +78,7 @@ private:
     // Not visible to client code
     // Function does not throw
     // Preconditions:
-    //		board must be a valid boardType
+    //  	board must be a valid boardType
 	static bool checkHorizontal(const boardType & board, unsigned int x,unsigned int y);
 
     // checkVertical()
@@ -87,7 +87,7 @@ private:
     // Not visible to client code
     // Function does not throw
     // Preconditions:
-    //		board must be a valid boardType
+    //  	board must be a valid boardType
 	static bool checkVertical(const boardType & board, unsigned int x, unsigned int y);
 
     // checkRange()
@@ -95,7 +95,7 @@ private:
     // Not visible to client code
     // Function does not throw
     // Preconditions:
-    //		board must be a valid boardType
+    //  	board must be a valid boardType
 	static bool checkRange(const boardType & board, unsigned int x, unsigned int y);
 };
 

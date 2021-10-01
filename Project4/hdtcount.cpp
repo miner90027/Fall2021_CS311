@@ -49,9 +49,9 @@ int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
 // Not visible to client code
 // Function does not throw
 // Preconditions:
-//		Board must be a valid 2D vector of ints
-//		Squares left must be a value between 0 & the total number of squares
-//		   that can be held in the board - the 2 forbidden spaces
+//  	Board must be a valid 2D vector of ints
+//  	Squares left must be a value between 0 & the total number of squares
+//  	   that can be held in the board - the 2 forbidden spaces
 int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
 
     // Base case
@@ -122,7 +122,7 @@ int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
 // Not visible to client code
 // Function does not throw
 // Preconditions:
-//		board must be a valid boardType
+//  	board must be a valid boardType
 bool HDTCounter::checkHorizontal(const boardType & board, unsigned int x, unsigned int y){
     // Check to make sure that the next space horizontally on the board is a valid space
     // Check to make sure that the next space horizontally on the board is empty
@@ -135,7 +135,7 @@ bool HDTCounter::checkHorizontal(const boardType & board, unsigned int x, unsign
 // Not visible to client code
 // Function does not throw
 // Preconditions:
-//		board must be a valid boardType
+//  	board must be a valid boardType
 bool HDTCounter::checkVertical(const boardType & board, unsigned int x, unsigned int y){
     // Check to make sure that the next space vertically on the board is a valid space
     // Check to make sure that the next space vertically on the board is empty
@@ -147,7 +147,7 @@ bool HDTCounter::checkVertical(const boardType & board, unsigned int x, unsigned
 // Not visible to client code
 // Function does not throw
 // Preconditions:
-//		board must be a valid boardType
+//  	board must be a valid boardType
 bool HDTCounter::checkRange(const boardType & board, unsigned int x,unsigned int y){
     // Verify that the x & y values are within the range of the given board
 	return (x < board.size() && y < board[0].size());

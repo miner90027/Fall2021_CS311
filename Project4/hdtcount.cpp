@@ -18,86 +18,68 @@ int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, uns
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
-return hdtCount_recurse(board, 0, 0,(dim_y * dim_x) - 2); // dummy return
+return hdtCount_recurse(board,(dim_y * dim_x) - 2); // dummy return
 }
 
 
-int hdtCount_recurse(boardType & board,  int curr_x,  int curr_y, unsigned int squaresLeft, int partialSolutions, int
-solutions) {
+int hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 
-
-	if (squaresLeft == 0) {
-		++solutions;
+	//std::cout << "new recurse\n\tsquaresLeft: " << squaresLeft << std::endl;
+	if (squaresLeft == 0){
+		//std::cout << "Solutions: " << +1 << std::endl;
 		return 1;
 	}
+	int solutions = 0;
 
-	int squaresRemoved = 0;
+		for(unsigned int x = 0; x < board.size(); ++x) {
+			for (unsigned int y = 0; y < board[0].size(); ++y) {
 
-	if(checkRange(board, curr_x, curr_y)){
-		for(int x = curr_x; x < board.size() && curr_y < board[0].size(); ++x,squaresRemoved = 0){
-			if (board[x][curr_y] == 1)
-				continue;
+				if (board[x][y] == 1)
+					continue;
 
-			if (checkVertical(board, x, curr_y)) {
-				squaresRemoved += 2;
-				++partialSolutions;
+				if (checkVertical(board, x, y)) {
+					//std::cout << "\t\tChecking Vertical..." << std::endl;
+					board[x][y] = 1;
+					board[x][y + 1] = 1;
+
+					solutions += hdtCount_recurse(board, squaresLeft -2);
+
+					board[x][y] = 0;
+					board[x][y + 1] = 0;
+
+				}
+
+				if (checkHorizontal(board, x, y)) {
+					//std::cout << "\t\tChecking Horizontal..." << std::endl;
+					board[x][y] = 1;
+					board[x + 1][y] = 1;
+
+					solutions += hdtCount_recurse(board, squaresLeft-2);
+
+
+					board[x][y] = 0;
+					board[x + 1][y] = 0;
+				}
+
+				x = board.size();
+				y = board[0].size();
+
 			}
-
-			if (checkHorizontal(board, x, curr_y)) {
-				squaresRemoved += 2;
-				++partialSolutions;
-				//solutions += hdtCount_recurse(board, curr_x +1, curr_y, squaresLeft-2);
-			}
 		}
-		squaresLeft -= squaresRemoved;
-		solutions += hdtCount_recurse(board, curr_x, curr_y + 1, squaresLeft);
-		squaresLeft += squaresRemoved;
-	}
 
-
-/*
-	if (checkRange(board, curr_x, curr_y)) {
-		if (checkVertical(board, curr_x, curr_y)) {
-			squaresLeft -= 2;
-			++partialSolutions;
-		}
-		if (checkHorizontal(board, curr_x, curr_y)) {
-			squaresLeft -= 2;
-			++partialSolutions;
-		}
-	}
-	else{
-			return 0;
-	}
-
-	if(checkRange(board, curr_x, curr_y + 1))
-		solutions += hdtCount_recurse(board, curr_x, curr_y + 1, squaresLeft, partialSolutions, solutions);
-	else if(checkRange(board, curr_x +1, curr_y))
-		solutions += hdtCount_recurse(board, curr_x +1, 0, squaresLeft, partialSolutions, solutions);
-*/
-	return solutions; // dummy return
+	//std::cout << "\ttotal: " << solutions << std::endl;
+	return solutions;
 
 }
 
-bool checkHorizontal(boardType & board, int x, int y){
-	return checkRange(board, x +1, y) && (board[x+1][y] != 1);
+bool checkHorizontal(const boardType & board, unsigned int x, unsigned int y){
+	return checkRange(board, x +1, y) && (board[x+1][y] == 0);
 }
 
-bool checkVertical(boardType & board, int x, int y){
-    return checkRange(board, x, y+1) && (board[x][y+1] != 1);
+bool checkVertical(const boardType & board, unsigned int x, unsigned int y){
+    return checkRange(board, x, y+1) && (board[x][y+1] == 0);
 }
 
-int checkDomino(boardType & board, int x, int y) {
-	if(checkHorizontal(board, x, y) && !checkVertical(board, x, y))
-		return 1;
-	else if(!checkHorizontal(board, x, y) && checkVertical(board, x, y))
-		return 2;
-	else if(checkHorizontal(board, x, y) && checkVertical(board, x, y))
-		return 3;
-	else
-		return 0;
-}
-
-bool checkRange(boardType & board, int x, int y){
+bool checkRange(const boardType & board, unsigned int x, unsigned int y){
 	return (x < board.size() && y < board[0].size());
 }

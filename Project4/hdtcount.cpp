@@ -8,19 +8,39 @@
 
 #include "hdtcount.h"
 
+/******************************************/
+/***      Public Friend Functions       ***/
+/******************************************/
+
+// hdtCount()
+// Wrapper function that Returns the total possible number of ways dominoes can be placed
+//  on a board of a given siz given that there are 2 places on the board that do not exist
+// The only public facing function for the class; made friend to be accessed by client
+// Preconditions:
+//  	both dim_x & dim_y must be >= 0
+//   	all the forbid_x variables must fall within the values between 0 & x
+//   	all the forbid_y variables must fall within the values between 0 & y
 int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, unsigned int forbid1_y,
 			 unsigned int forbid2_x, unsigned int forbid2_y){
 
-	if(dim_x == 1 && dim_y == 1) return 0;
-
+	 // create the board using the x & y values given
+	 // default all spaces to 0
      boardType board(dim_x, std::vector<int>(dim_y, 0));
+
+	 // Set both of the forbidden spaces = to 1
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
+	 //create a HDTCounter object
 	 HDTCounter a;
+
+	 //call and return the value returned by the workhorse function
 return a.hdtCount_recurse(board,(dim_y * dim_x) - 2);
 }
 
+/******************************************/
+/***     Private Member Functions       ***/
+/******************************************/
 
 int HDTCounter::hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 

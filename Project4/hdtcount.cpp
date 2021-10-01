@@ -51,7 +51,7 @@ int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
 // Preconditions:
 //		Board must be a valid 2D vector of ints
 //		Squares left must be a value between 0 & the total number of squares
-//         that can be held in the board - the 2 forbidden spaces
+//          that can be held in the board - the 2 forbidden spaces
 int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
 
     // Base case

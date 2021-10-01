@@ -69,7 +69,7 @@ private:
     // Preconditions:
     //		Board must be a valid 2D vector of ints
     //		Squares left must be a value between 0 & the total number of squares
-    //         that can be held in the board - the 2 forbidden spaces
+    //          that can be held in the board - the 2 forbidden spaces
 	int hdtCount_recurse(boardType & board, int squaresLeft);
 
     // checkHorizontal()

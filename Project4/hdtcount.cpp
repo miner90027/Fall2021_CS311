@@ -18,8 +18,8 @@
 // The only public facing function for the class; made friend to be accessed by client
 // Preconditions:
 //  	both dim_x & dim_y must be >= 1
-//   	all the forbid_x variables must fall within the values between 0 & dim_x
-//   	all the forbid_y variables must fall within the values between 0 & dim_y
+//  	all the forbid_x variables must fall within the values between 0 & dim_x
+//  	all the forbid_y variables must fall within the values between 0 & dim_y
 int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
 			 int forbid2_x, int forbid2_y){
 
@@ -51,7 +51,7 @@ int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
 // Preconditions:
 //		Board must be a valid 2D vector of ints
 //		Squares left must be a value between 0 & the total number of squares
-//          that can be held in the board - the 2 forbidden spaces
+//		   that can be held in the board - the 2 forbidden spaces
 int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
 
     // Base case

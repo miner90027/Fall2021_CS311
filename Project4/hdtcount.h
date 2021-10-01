@@ -14,7 +14,7 @@
 /******************************************/
 /***         Global Member Types        ***/
 /******************************************/
-//define the data type of the board as a 2D-vector
+//define the data type of the board as a 2D-vector of ints
 using boardType = std::vector<std::vector<int>>;
 
 // Define container class to contain all the functions
@@ -30,7 +30,7 @@ public:
 	// The only public facing function for the class; made friend to be accessed by client
 	// Function does not throw
 	// Preconditions:
-	//  	both dim_x & dim_y must be >= 0
+	//  	both dim_x & dim_y must be >= 1
 	//   	all the forbid_x variables must fall within the values between 0 & x
 	//   	all the forbid_y variables must fall within the values between 0 & y
 	friend int hdtCount(int dim_x, int dim_y, int forbid1_x,
@@ -44,8 +44,7 @@ public:
 	//default the basic ctor & dctor
 	HDTCounter() = default;
 	~HDTCounter() = default;
-	
-	// make all copy & move ctors private
+
 	// class cannot be copied or moved
 	// delete all copy & move ctors
 
@@ -65,22 +64,38 @@ private:
 	// hdtCount_recurse()
 	// Recursive workhorse function for hdtCount()
 	// Returns the total number of possible solutions for a given board
+    // Not visible to client code
 	// Function does not throw
 	// Preconditions:
 	//		Board must be a valid 2D vector of ints
-	//		Squares left must be a value of 0 or greater
+    //		Squares left must be a value between 0 & the total number of squares
+    //         that can be held in the board - the 2 forbidden spaces
 	int hdtCount_recurse(boardType & board, int squaresLeft);
 
 	// checkHorizontal()
-	// Returns if a domino can be placed horizontally on the given board at the given
+	// Returns true if a domino can be placed horizontally on the given board at the given
 	//  coordinates
+    // Not visible to client code
 	// Function does not throw
 	// Preconditions:
 	//		board must be a valid boardType
 	static bool checkHorizontal(const boardType & board, unsigned int x,unsigned int y);
-	
+
+    // checkVertical()
+    // Returns true if a domino can be placed vertically on the given board at the given
+    //  coordinates
+    // Not visible to client code
+    // Function does not throw
+    // Preconditions:
+    //		board must be a valid boardType
 	static bool checkVertical(const boardType & board, unsigned int x, unsigned int y);
-	
+
+    // checkRange()
+    // Returns true if the given x, y coordinates are within the range of the given board
+    // Not visible to client code
+    // Function does not throw
+    // Preconditions:
+    //		board must be a valid boardType
 	static bool checkRange(const boardType & board, unsigned int x, unsigned int y);
 };
 

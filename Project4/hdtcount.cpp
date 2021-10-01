@@ -31,22 +31,27 @@ solutions) {
 		return 1;
 	}
 
+	int squaresRemoved = 0;
+
 	if(checkRange(board, curr_x, curr_y)){
-		for(int x = curr_x; x < board.size() && curr_y < board[0].size(); ++x){
+		for(int x = curr_x; x < board.size() && curr_y < board[0].size(); ++x,squaresRemoved = 0){
 			if (board[x][curr_y] == 1)
 				continue;
 
 			if (checkVertical(board, x, curr_y)) {
-				squaresLeft -= 2;
+				squaresRemoved += 2;
 				++partialSolutions;
 			}
+
 			if (checkHorizontal(board, x, curr_y)) {
-				squaresLeft -= 2;
+				squaresRemoved += 2;
 				++partialSolutions;
 				//solutions += hdtCount_recurse(board, curr_x +1, curr_y, squaresLeft-2);
 			}
 		}
-		solutions += hdtCount_recurse(board, curr_x, curr_y + 1, squaresLeft, partialSolutions, solutions);
+		squaresLeft -= squaresRemoved;
+		solutions += hdtCount_recurse(board, curr_x, curr_y + 1, squaresLeft);
+		squaresLeft += squaresRemoved;
 	}
 
 

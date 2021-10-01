@@ -20,8 +20,8 @@
 //  	both dim_x & dim_y must be >= 0
 //   	all the forbid_x variables must fall within the values between 0 & x
 //   	all the forbid_y variables must fall within the values between 0 & y
-int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, unsigned int forbid1_y,
-			 unsigned int forbid2_x, unsigned int forbid2_y){
+int hdtCount(int dim_x, int dim_y, int forbid1_x, int forbid1_y,
+			 int forbid2_x, int forbid2_y){
 
 	 // create the board using the x & y values given
 	 // default all spaces to 0
@@ -41,8 +41,14 @@ return a.hdtCount_recurse(board,(dim_y * dim_x) - 2);
 /******************************************/
 /***     Private Member Functions       ***/
 /******************************************/
-
-int HDTCounter::hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
+// hdtCount_recurse()
+// Recursive workhorse function for hdtCount()
+// Returns the total number of possible solutions for a given board
+// Function does not throw
+// Preconditions:
+//		Board must be a valid 2D vector of ints
+//		Squares left must be a value of 0 or greater
+int HDTCounter::hdtCount_recurse(boardType & board, int squaresLeft) {
 
 
 	if (squaresLeft == 0){
@@ -86,6 +92,12 @@ int HDTCounter::hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 
 }
 
+// checkHorizontal()
+// Returns if a domino can be placed horizontally on the given board at the given
+//  coordinates
+// Function does not throw
+// Preconditions:
+//		board must be a valid boardType
 bool HDTCounter::checkHorizontal(const boardType & board, unsigned int x, unsigned int y){
 	return checkRange(board, x +1, y) && (board[x+1][y] == 0);
 }
@@ -94,6 +106,6 @@ bool HDTCounter::checkVertical(const boardType & board, unsigned int x, unsigned
     return checkRange(board, x, y+1) && (board[x][y+1] == 0);
 }
 
-bool HDTCounter::checkRange(const boardType & board, unsigned int x, unsigned int y){
+bool HDTCounter::checkRange(const boardType & board, unsigned int x,unsigned int y){
 	return (x < board.size() && y < board[0].size());
 }

@@ -7,7 +7,6 @@
  */
 
 #include "hdtcount.h"
-#include <iostream>
 
 int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, unsigned int forbid1_y,
 			 unsigned int forbid2_x, unsigned int forbid2_y){
@@ -18,15 +17,15 @@ int hdtCount(unsigned int dim_x, unsigned int dim_y, unsigned int forbid1_x, uns
      board[forbid1_x][forbid1_y] = 1;
      board[forbid2_x][forbid2_y] = 1;
 
-return hdtCount_recurse(board,(dim_y * dim_x) - 2); // dummy return
+	 HDTCounter a;
+return a.hdtCount_recurse(board,(dim_y * dim_x) - 2);
 }
 
 
-int hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
+int HDTCounter::hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 
-	//std::cout << "new recurse\n\tsquaresLeft: " << squaresLeft << std::endl;
+
 	if (squaresLeft == 0){
-		//std::cout << "Solutions: " << +1 << std::endl;
 		return 1;
 	}
 	int solutions = 0;
@@ -38,7 +37,6 @@ int hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 					continue;
 
 				if (checkVertical(board, x, y)) {
-					//std::cout << "\t\tChecking Vertical..." << std::endl;
 					board[x][y] = 1;
 					board[x][y + 1] = 1;
 
@@ -50,7 +48,6 @@ int hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 				}
 
 				if (checkHorizontal(board, x, y)) {
-					//std::cout << "\t\tChecking Horizontal..." << std::endl;
 					board[x][y] = 1;
 					board[x + 1][y] = 1;
 
@@ -62,23 +59,21 @@ int hdtCount_recurse(boardType & board, unsigned int squaresLeft) {
 
 				x = board.size();
 				y = board[0].size();
-
 			}
 		}
 
-	//std::cout << "\ttotal: " << solutions << std::endl;
 	return solutions;
 
 }
 
-bool checkHorizontal(const boardType & board, unsigned int x, unsigned int y){
+bool HDTCounter::checkHorizontal(const boardType & board, unsigned int x, unsigned int y){
 	return checkRange(board, x +1, y) && (board[x+1][y] == 0);
 }
 
-bool checkVertical(const boardType & board, unsigned int x, unsigned int y){
+bool HDTCounter::checkVertical(const boardType & board, unsigned int x, unsigned int y){
     return checkRange(board, x, y+1) && (board[x][y+1] == 0);
 }
 
-bool checkRange(const boardType & board, unsigned int x, unsigned int y){
+bool HDTCounter::checkRange(const boardType & board, unsigned int x, unsigned int y){
 	return (x < board.size() && y < board[0].size());
 }

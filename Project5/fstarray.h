@@ -48,8 +48,8 @@
  *     default ctor/ctor from size.
  */
 
-#ifndef FILE_FSARRAY_H_INCLUDED
-#define FILE_FSARRAY_H_INCLUDED
+#ifndef FALL2021_CS311_FSTARRAY_H
+#define FALL2021_CS311_FSTARRAY_H
 
 #include <cstddef>      // For std::size_t
 #include <algorithm>    // For std::max & std::copy
@@ -276,5 +276,5 @@ private:
 };  // End class FSTArray
 
 
-#endif  //#ifndef FILE_FSARRAY_H_INCLUDED
+#endif  //#ifndef FALL2021_CS311_FSTARRAY_H
 

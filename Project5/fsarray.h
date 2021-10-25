@@ -1,58 +1,64 @@
-// fsarray.h  INCOMPLETE
-// VERSION 6
-// Glenn G. Chappell
-// Started: 2021-10-12
-// Updated: 2021-10-20
-//
-// For CS 311 Fall 2021
-// Header for class FSArray
-// Frightfully smart array of int
-// Preliminary to Project 5
+/*
+ * fsarray.h
+ * VERSION 6
+ * Glenn G. Chappell
+ * Started: 2021-10-12
+ * Updated: 2021-10-20
+ *
+ * Finished by:
+ * Aleks McCormick & Purev
+ * 2021/10/22
+ *
+ * For CS 311 Fall 2021
+ * Header for class FSArray
+ * Frightfully smart array of int
+ * Preliminary to Project 5
+ */
 
-// History:
-// - v1:
-//   - Bare-bones only, does not compile. Header & source files,
-//     #ifndef, #include, empty class definition.
-// - v2:
-//   - Add member types value_type, size_type, iterator, const_iterator.
-//   - Add dummy versions (at least) of all member functions, including
-//     dummy return statements for non-void functions. Package compiles.
-//   - Add data members.
-//   - Add class invariants.
-//   - Write (untested versions of) the following member functions:
-//     default ctor, ctor from size (these two are single func), dctor,
-//     op[], size, empty, begin, end, push_back, pop_back.
-// - v3:
-//   - Document exception-safety guarantees for most functions.
-//   - Write copy ctor.
-// - v4:
-//   - Revise class invariants to allow for _data being nullptr if _size
-//     is zero.
-//   - Revise ctor from size, copy ctor accordingly.
-//   - Write move ctor.
-//   - Mark various functions as noexcept.
-// - v5:
-//   - Move func defs to source file: copy & move ops, resize, insert,
-//     erase, swap.
-// - v6:
-//   - Add _capacity data member.
-//   - Revise class invariants & ctors accordingly.
-//   - Add constant DEFAULT_CAP and use it in setting the capacity in
-//     default ctor/ctor from size.
+/*
+ * History:
+ * - v1:
+ *   - Bare-bones only, does not compile. Header & source files,
+ *     #ifndef, #include, empty class definition.
+ * - v2:
+ *   - Add member types value_type, size_type, iterator, const_iterator.
+ *   - Add dummy versions (at least) of all member functions, including
+ *     dummy return statements for non-void functions. Package compiles.
+ *   - Add data members.
+ *   - Add class invariants.
+ *   - Write (untested versions of) the following member functions:
+ *     default ctor, ctor from size (these two are single func), dctor,
+ *     op[], size, empty, begin, end, push_back, pop_back.
+ * - v3:
+ *   - Document exception-safety guarantees for most functions.
+ *   - Write copy ctor.
+ * - v4:
+ *   - Revise class invariants to allow for _data being nullptr if _size
+ *     is zero.
+ *   - Revise ctor from size, copy ctor accordingly.
+ *   - Write move ctor.
+ *   - Mark various functions as noexcept.
+ * - v5:
+ *   - Move func defs to source file: copy & move ops, resize, insert,
+ *     erase, swap.
+ * - v6:
+ *   - Add _capacity data member.
+ *   - Revise class invariants & ctors accordingly.
+ *   - Add constant DEFAULT_CAP and use it in setting the capacity in
+ *     default ctor/ctor from size.
+ */
 
 #ifndef FILE_FSARRAY_H_INCLUDED
 #define FILE_FSARRAY_H_INCLUDED
 
-#include <cstddef>
-// For std::size_t
-#include <algorithm>
-// For std::max
+#include <cstddef>      // For std::size_t
+#include <algorithm>    // For std::max & std::copy
 
 
-// *********************************************************************
-// class FSArray - Class definition
-// *********************************************************************
-
+/******************************************/
+/***              FSArray               ***/
+/***          Class definition          ***/
+/******************************************/
 
 // class FSArray
 // Frightfully Smart Array of int.
@@ -64,7 +70,9 @@
 //      _capacity == 0, in which case _data may be nullptr.
 class FSArray {
 
-// ***** FSArray: types *****
+/******************************************/
+/***        Public Member Types         ***/
+/******************************************/
 public:
 
     // value_type: type of data items
@@ -77,13 +85,17 @@ public:
     using iterator = value_type *;
     using const_iterator = const value_type *;
 
-// ***** FSArray: internal-use constants *****
+/******************************************/
+/***       Internal Use Constants       ***/
+/******************************************/
 private:
 
     // Capacity of default-constructed object
     enum { DEFAULT_CAP = 16 };
 
-// ***** FSArray: ctors, op=, dctor *****
+/******************************************/
+/***         Ctors, Op=, Dctor          ***/
+/******************************************/
 public:
 
     // Default ctor & ctor from size
@@ -98,19 +110,45 @@ public:
 
     // Copy ctor
     // Strong Guarantee
-    FSArray(const FSArray & other);
+    FSArray(const FSArray & other)
+            :_capacity(other._capacity),
+             _size(other.size()),
+             _data(other._capacity == 0 ? nullptr
+                                        : new value_type[other._capacity])
+    {
+        std::copy(other.begin(), other.end(), begin());
+        // The above call to std::copy does not throw, since it copies int
+        // values. But if value_type is changed, then the call may throw, in
+        // which case this copy ctor may need to be rewritten.
+    };
 
     // Move ctor
     // No-Throw Guarantee
-    FSArray(FSArray && other) noexcept;
+    FSArray(FSArray && other) noexcept
+            :_capacity(other._capacity),
+             _size(other._size),
+             _data(other._data)
+    {
+        other._capacity = 0;
+        other._size = 0;
+        other._data = nullptr;
+    }
 
     // Copy assignment operator
     // ??? Guarantee
-    FSArray & operator=(const FSArray & other);
+    FSArray & operator=(const FSArray & other)
+    {
+        // TODO: WRITE THIS!!!
+        return *this; // DUMMY
+    }
 
     // Move assignment operator
     // No-Throw Guarantee
-    FSArray & operator=(FSArray && other) noexcept;
+    FSArray & operator=(FSArray && other) noexcept
+    {
+        // TODO: WRITE THIS!!!
+        return *this; // DUMMY
+    }
 
     // Dctor
     // No-Throw Guarantee
@@ -119,7 +157,9 @@ public:
         delete [] _data;
     }
 
-// ***** FSArray: general public operators *****
+/******************************************/
+/***     General Public Operators       ***/
+/******************************************/
 public:
 
     // operator[] - non-const & const
@@ -135,7 +175,9 @@ public:
         return _data[index];
     }
 
-// ***** FSArray: general public functions *****
+/******************************************/
+/***     General Public Functions       ***/
+/******************************************/
 public:
 
     // size
@@ -176,16 +218,27 @@ public:
 
     // resize
     // ??? Guarantee
-    void resize(size_type newsize);
+    void resize(size_type newsize)
+    {
+        // TODO: WRITE THIS!!!
+    }
 
     // insert
     // ??? Guarantee
     iterator insert(iterator pos,
-                    const value_type & item);
+                    const value_type & item)
+    {
+        // TODO: WRITE THIS!!!
+        return begin();  // DUMMY
+    }
 
     // erase
     // ??? Guarantee
-    iterator erase(iterator pos);
+    iterator erase(iterator pos)
+    {
+        // TODO: WRITE THIS!!!
+        return begin();  // DUMMY
+    }
 
     // push_back
     // ??? Guarantee
@@ -203,9 +256,14 @@ public:
 
     // swap
     // No-Throw Guarantee
-    void swap(FSArray & other) noexcept;
+    void swap(FSArray & other) noexcept
+    {
+        // TODO: WRITE THIS!!!
+    }
 
-// ***** FSArray: data members *****
+/******************************************/
+/***           Data Members             ***/
+/******************************************/
 private:
 
     // Below, _capacity must be declared before _data

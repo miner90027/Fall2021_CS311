@@ -10,7 +10,7 @@
  * 2021/10/22
  *
  * For CS 311 Fall 2021
- * Header for class FSArray
+ * Header for class FSTArray
  * Frightfully smart array of int
  * Preliminary to Project 5
  */
@@ -56,11 +56,11 @@
 
 
 /******************************************/
-/***              FSArray               ***/
+/***              FSTArray               ***/
 /***          Class definition          ***/
 /******************************************/
 
-// class FSArray
+// class FSTArray
 // Frightfully Smart Array of int.
 // Resizable, copyable/movable, exception-safe.
 // Invariants:
@@ -70,7 +70,7 @@
 //      _capacity == 0, in which case _data may be nullptr.
 
 template <typename Type>
-class FSArray {
+class FSTArray {
 
 /******************************************/
 /***        Public Member Types         ***/
@@ -102,7 +102,7 @@ public:
 
     // Default ctor & ctor from size
     // Strong Guarantee
-    explicit FSArray(size_type size=0)
+    explicit FSTArray(size_type size=0)
         :_capacity(std::max(size, size_type(DEFAULT_CAP))),
             // _capacity must be declared before _data
          _size(size),
@@ -112,7 +112,7 @@ public:
 
     // Copy ctor
     // Strong Guarantee
-    FSArray(const FSArray & other)
+    FSTArray(const FSTArray<Type> & other)
             :_capacity(other._capacity),
              _size(other.size()),
              _data(other._capacity == 0 ? nullptr
@@ -124,9 +124,9 @@ public:
         // which case this copy ctor may need to be rewritten.
     };
 
-    // Move ctor
+    // Move ctor,
     // No-Throw Guarantee
-    FSArray(FSArray && other) noexcept
+    FSTArray(FSTArray<Type> && other) noexcept
             :_capacity(other._capacity),
              _size(other._size),
              _data(other._data)
@@ -138,15 +138,15 @@ public:
 
     // Copy assignment operator
     // ??? Guarantee
-    FSArray & operator=(const FSArray & other)
+    FSTArray & operator=(const FSTArray<Type> & other)
     {
-        // TODO: WRITE THIS!!!
+        // TODO: WRITE THIS!!!>
         return *this; // DUMMY
     }
 
     // Move assignment operator
     // No-Throw Guarantee
-    FSArray & operator=(FSArray && other) noexcept
+    FSTArray & operator=(FSTArray<Type> && other) noexcept
     {
         // TODO: WRITE THIS!!!
         return *this; // DUMMY
@@ -154,7 +154,7 @@ public:
 
     // Dctor
     // No-Throw Guarantee
-    ~FSArray()
+    ~FSTArray()
     {
         delete [] _data;
     }
@@ -258,7 +258,7 @@ public:
 
     // swap
     // No-Throw Guarantee
-    void swap(FSArray & other) noexcept
+    void swap(FSTArray & other) noexcept
     {
         // TODO: WRITE THIS!!!
     }
@@ -273,7 +273,7 @@ private:
     size_type    _size;      // Size of client's data
     value_type * _data;      // Pointer to our array
 
-};  // End class FSArray
+};  // End class FSTArray
 
 
 #endif  //#ifndef FILE_FSARRAY_H_INCLUDED

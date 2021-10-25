@@ -18,4 +18,4 @@ add_executable(GlobeProject1 Project1/delivery_test.cpp Project1/delivery.cpp Pr
 add_executable(GlobeProject2 Project2/ssarray_test.cpp Project2/ssarray.h)
 add_executable(GlobeProject3 Project3/dp3_test.cpp Project3/dp3.h Project3/dp3.cpp)
 add_executable(GlobeProject4 Project4/hdtcount_test.cpp Project4/hdtcount.cpp Project4/hdtcount.h)
-add_executable(GlobeProject5 Project5/fsarray.cpp Project5/fsarray.h )
+add_executable(GlobeProject5 Project5/fstarray.h Project5/fstarray_test.cpp)

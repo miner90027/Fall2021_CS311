@@ -52,7 +52,8 @@
 #define FALL2021_CS311_FSTARRAY_H
 
 #include <cstddef>      // For std::size_t
-#include <algorithm>    // For std::max & std::copy
+#include <algorithm>    // For std::max & std::copy & std::rotate
+#include <utility>      // For std::move
 
 
 /******************************************/
@@ -140,15 +141,24 @@ public:
     // ??? Guarantee
     FSTArray & operator=(const FSTArray<Type> & other)
     {
-        // TODO: WRITE THIS!!!>
-        return *this; // DUMMY
+        auto obj = other;   
+        swap(obj);
+        return *this;
     }
 
     // Move assignment operator
     // No-Throw Guarantee
     FSTArray & operator=(FSTArray<Type> && other) noexcept
     {
-        // TODO: WRITE THIS!!!
+        auto dummy = _data;
+
+        _capacity = other._capacity;
+        _size = other._size;
+        _data = other._data;
+
+        other._capacity = 0;
+        other._size = 0;
+        other._data = dummy;
         return *this; // DUMMY
     }
 
@@ -222,7 +232,24 @@ public:
     // ??? Guarantee
     void resize(size_type newsize)
     {
-        // TODO: WRITE THIS!!!
+        if(newsize <= _capacity){
+            _size = newsize;
+            return;
+        }
+
+        size_type newCapacity = _capacity;
+
+        while(newCapacity < newsize){
+            newCapacity *= 2;
+        }
+
+        value_type * temp = new value_type[newCapacity]; //This throws
+
+        std::copy(begin(), end(), temp);
+
+        _capacity = newCapacity;
+        _size = newsize;
+        _data = temp;
     }
 
     // insert
@@ -230,7 +257,8 @@ public:
     iterator insert(iterator pos,
                     const value_type & item)
     {
-        // TODO: WRITE THIS!!!
+        if(_capacity =< _size + 1)
+            
         return begin();  // DUMMY
     }
 
@@ -260,7 +288,9 @@ public:
     // No-Throw Guarantee
     void swap(FSTArray & other) noexcept
     {
-        // TODO: WRITE THIS!!!
+        std::swap(_capacity, other._capacity);
+        std::swap(_size, other._size);
+        std::swap(_data, other._data);
     }
 
 /******************************************/
@@ -277,4 +307,3 @@ private:
 
 
 #endif  //#ifndef FALL2021_CS311_FSTARRAY_H
-

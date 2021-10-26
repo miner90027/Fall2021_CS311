@@ -176,7 +176,7 @@ public:
 
     // operator[] - non-const & const
     // Pre:
-    //     ???
+    //     index must be a valid size_type value between 0 and _size
     // No-Throw Guarantee
     value_type & operator[](size_type index)
     {
@@ -239,7 +239,7 @@ public:
 
         size_type newCapacity = _capacity;
 
-        while(newCapacity < newsize){
+        while(newCapacity <= newsize){
             newCapacity *= 2;
         }
 
@@ -257,8 +257,9 @@ public:
     iterator insert(iterator pos,
                     const value_type & item)
     {
-        if(_capacity =< _size + 1)
-            
+		resize(++_size);
+
+
         return begin();  // DUMMY
     }
 
@@ -266,6 +267,7 @@ public:
     // ??? Guarantee
     iterator erase(iterator pos)
     {
+		resize(--_size);
         // TODO: WRITE THIS!!!
         return begin();  // DUMMY
     }

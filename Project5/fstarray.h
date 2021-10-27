@@ -150,16 +150,8 @@ public:
     // No-Throw Guarantee
     FSTArray & operator=(FSTArray<Type> && other) noexcept
     {
-        auto dummy = _data;
-
-        _capacity = other._capacity;
-        _size = other._size;
-        _data = other._data;
-
-        other._capacity = 0;
-        other._size = 0;
-        other._data = dummy;
-        return *this; // DUMMY
+        swap(other);
+        return *this; 
     }
 
     // Dctor
@@ -176,7 +168,7 @@ public:
 
     // operator[] - non-const & const
     // Pre:
-    //     index must be a valid size_type value between 0 and _size
+    //     ???
     // No-Throw Guarantee
     value_type & operator[](size_type index)
     {
@@ -239,7 +231,7 @@ public:
 
         size_type newCapacity = _capacity;
 
-        while(newCapacity <= newsize){
+        while(newCapacity < newsize){
             newCapacity *= 2;
         }
 
@@ -250,6 +242,7 @@ public:
         _capacity = newCapacity;
         _size = newsize;
         _data = temp;
+        //delete temp;
     }
 
     // insert
@@ -257,19 +250,30 @@ public:
     iterator insert(iterator pos,
                     const value_type & item)
     {
-		resize(++_size);
+        resize(_size+1);
 
+        auto range = _size - size_type((pos - _data + 1));// Find how much to move
 
-        return begin();  // DUMMY
+        for(size_type i = 0; i < range; ++i)
+            std::rotate(pos, pos + 1, end());//From given position move everything up by one.
+        
+        _data[_size - range - 1] = item; //Insert AKA Commit
+
+        return (_data + _size - range - 1);
     }
 
     // erase
     // ??? Guarantee
     iterator erase(iterator pos)
     {
-		resize(--_size);
-        // TODO: WRITE THIS!!!
-        return begin();  // DUMMY
+        auto range = _size - size_type((pos - _data + 1));// Find how much to interate to find position
+
+        for(size_type i = 0; i < range; ++i)
+            std::rotate(pos , pos+range, end()); //Rotate till erased index is in last
+
+        resize(_size-1); //Resize last so we erase the last index?
+
+        return pos; 
     }
 
     // push_back

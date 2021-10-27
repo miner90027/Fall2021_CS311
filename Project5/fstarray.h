@@ -224,26 +224,23 @@ public:
     // ??? Guarantee
     void resize(size_type newsize)
     {
-        if(newsize <= _capacity){
+        if(newsize < _capacity){
             _size = newsize;
             return;
         }
 
         size_type newCapacity = _capacity;
 
-        while(newCapacity < newsize){
+        while(newCapacity <= newsize) {
             newCapacity *= 2;
         }
 
-
-        value_type * temp = new value_type[newCapacity]; //This could throw
+        auto *temp = new value_type[newCapacity]; //This could throw
         std::copy(begin(), end(), temp);
 
-		//delete [] _data;
         _capacity = newCapacity;
         _size = newsize;
         _data = temp;
-        delete[] temp;
     }
 
     // insert

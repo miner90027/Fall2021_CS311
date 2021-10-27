@@ -12,7 +12,11 @@
 int main(){
 	FSTArray<int> tst;
 	FSTArray<int> fsf(100);
-
+/*
+    tst.resize(20);
+    tst[19]= 200;
+    std::cout << tst[19]<< std::endl;
+*/
 	for(int i = 0; i < 50; ++i){
 		std::cout << "size: " << tst.size() << "  tst[i]: ";
 		tst.push_back(i);
@@ -20,7 +24,13 @@ int main(){
 		std::cout << tst[i] << std::endl;
 	}
 
-	//tst.swap(fsf);
+    /*
+    fsf[20]= 30;
+    std::cout << fsf[20] << std::endl;
 
-    return 0;//tst[20];
+	tst.swap(fsf);
+    //tst[20]= 30;
+    std::cout << tst[20] << std::endl;
+     */
+    return 0;
 }

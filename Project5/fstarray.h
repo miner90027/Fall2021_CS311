@@ -235,21 +235,15 @@ public:
             newCapacity *= 2;
         }
 
-		FSTArray<value_type> temp(newCapacity);
-        //value_type * temp = new value_type[newCapacity]; //This throws
 
-		swap(temp);
-        //std::copy(begin(), end(), temp._data);
+        value_type * temp = new value_type[newCapacity]; //This could throw
+        std::copy(begin(), end(), temp);
 
-		//std::cout << "\n" << temp[11] << std::endl;
-
-		/*
+		//delete [] _data;
         _capacity = newCapacity;
         _size = newsize;
-        _data-> temp;
-        */
-
-        //delete temp;
+        _data = temp;
+        delete[] temp;
     }
 
     // insert

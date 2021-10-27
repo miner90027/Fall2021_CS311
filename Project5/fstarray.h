@@ -235,13 +235,20 @@ public:
             newCapacity *= 2;
         }
 
-        value_type * temp = new value_type[newCapacity]; //This throws
+		FSTArray<value_type> temp(newCapacity);
+        //value_type * temp = new value_type[newCapacity]; //This throws
 
-        std::copy(begin(), end(), temp);
+		swap(temp);
+        //std::copy(begin(), end(), temp._data);
 
+		//std::cout << "\n" << temp[11] << std::endl;
+
+		/*
         _capacity = newCapacity;
         _size = newsize;
-        _data = temp;
+        _data-> temp;
+        */
+
         //delete temp;
     }
 
@@ -294,9 +301,9 @@ public:
     // No-Throw Guarantee
     void swap(FSTArray & other) noexcept
     {
-        std::swap(_capacity, other._capacity);
+		std::swap(_data, other._data);
+		std::swap(_capacity, other._capacity);
         std::swap(_size, other._size);
-        std::swap(_data, other._data);
     }
 
 /******************************************/

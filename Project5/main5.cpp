@@ -13,6 +13,14 @@ int main(){
 	FSTArray<int> tst;
 	FSTArray<int> fsf(100);
 
+    //test insert
+    fsf.insert(fsf.begin()+3, 21);
+    std::cout << "size: " << fsf.size() << std::endl;
+    for(std::size_t i = 0; i < fsf.size(); ++i){
+        //fsf[i] = i;
+        std::cout << "index: " << i << " value: " << fsf[i] << std::endl;
+    }
+
     //test resize
     /*
     tst.resize(200);
@@ -23,7 +31,7 @@ int main(){
 
     std::cout << "size: " << tst.size() << std::endl;
 */
-    //test insert
+    //test push_back
 /*
     for(int i = 0; i < 50; ++i){
         std::cout << "size: " << tst.size() << "  tst[i]: ";

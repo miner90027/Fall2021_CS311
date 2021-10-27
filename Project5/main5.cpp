@@ -7,8 +7,17 @@
  */
 
 #include <iostream>
+#include "fstarray.h"
 
 int main(){
-    std::cout << "Hello, world!" << std::endl;
+	FSTArray<int> tst;
+	for(int i = 0; i < 50; ++i){
+		std::cout << "size: " << tst.size() << "  tst[i]: ";
+		tst.push_back(i);
+		std::cout << tst[i] << std::endl;
+	}
+
+
+
     return 0;
 }

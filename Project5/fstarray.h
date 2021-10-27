@@ -221,7 +221,7 @@ public:
     }
 
     // resize
-    // ??? Guarantee
+    // Strong Guarantee
     void resize(size_type newsize)
     {
         if(newsize < _capacity){
@@ -236,8 +236,9 @@ public:
         }
 
         auto *temp = new value_type[newCapacity]; //This could throw
-        std::copy(begin(), end(), temp);
+        std::copy(begin(), end(), temp); //This could throw
 
+        //if either of the lines above throw, then the below code will not commit any changes
         _capacity = newCapacity;
         _size = newsize;
         _data = temp;
@@ -248,7 +249,10 @@ public:
     iterator insert(iterator pos,
                     const value_type & item)
     {
-        resize(_size+1);
+
+        // Current crashing issue seems to stem from code below
+
+        resize(_size+1); // Could possibly throw, in which case no change is made
 
         auto range = _size - size_type((pos - _data + 1));// Find how much to move
 

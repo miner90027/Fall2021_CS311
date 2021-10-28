@@ -134,7 +134,7 @@ public:
             delete [] _data; // delete allocated ptr if error thrown
             throw;
         }
-    };
+    }
 
     // Move ctor,
     // No-Throw Guarantee

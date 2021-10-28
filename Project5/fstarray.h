@@ -55,6 +55,7 @@
 #include <algorithm>    // For std::max & std::copy
 #include <utility>      // For std::move
 #include <iterator>     // For std::distance
+#include <iostream>
 
 
 /******************************************/
@@ -121,8 +122,15 @@ public:
                                         : new value_type[other._capacity])
     {
         
+		try {
+			std::copy(other.begin(), other.end(), begin());
+		}
+		catch (...){
+			delete [] _data;
+			throw;
+		}
 
-        std::copy(other.begin(), other.end(), begin());
+
         // The above call to std::copy does not throw, since it copies int
         // values. But if value_type is changed, then the call may throw, in
         // which case this copy ctor may need to be rewritten.
@@ -238,8 +246,16 @@ public:
             newCapacity *= 2;
         }
         auto *temp = new value_type[newCapacity]; //This could throw
-        std::copy(begin(), end(), temp); //This could throw
+		try{
+			std::copy(begin(), end(), temp); //This could throw
+		}
+		catch (...){
+			delete [] temp;
+			throw;
+		}
+
         //if either of the lines above throw, then the below code will not commit any changes
+		delete [] _data;
         _capacity = newCapacity;
         _size = newsize;
         _data = temp;

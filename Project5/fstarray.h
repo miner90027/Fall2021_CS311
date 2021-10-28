@@ -143,16 +143,16 @@ public:
              _size(other._size),
              _data(other._data)
     {
-		other._capacity = 0;
-		other._size = 0;
-		other._data = nullptr;
+        other._capacity = 0;
+        other._size = 0;
+        other._data = nullptr;
     }
 
     // Copy assignment operator
     // No-Throw Guarantee
     FSTArray & operator=(const FSTArray<Type> & other)
     {
-        auto obj = other;   
+        auto obj = other;
         swap(obj); // Cannot throw
         return *this;
     }
@@ -162,7 +162,7 @@ public:
     FSTArray & operator=(FSTArray<Type> && other) noexcept
     {
         swap(other); // Cannot throw
-        return *this; 
+        return *this;
     }
 
     // Dctor
@@ -179,15 +179,14 @@ public:
 
     // operator[] - non-const & const
     // Pre:
-    //  	0 <= index < _size
-    //  	_data cannot be null,
+    //      0 <= index < _size
+    //      _data cannot be null,
     // No-Throw Guarantee
-    value_type & operator[](size_type index)
-    {
+    value_type &operator[](size_type index) {
         return _data[index];
     }
-    const value_type & operator[](size_type index) const
-    {
+
+    const value_type &operator[](size_type index) const {
         return _data[index];
     }
 
@@ -234,37 +233,37 @@ public:
 
     // resize
     // Preconditions:
-    //  	newSize >= 0
-	// Note - The resize function can only throw when incrementing _size
-	//  		causes the function to increment _capacity; decrementing the _size
-	//  		does not change the _capacity.
-	//  		Therefore, resize can only throw if newSize >= _capacity.
+    //      newSize >= 0
+    // Note - The resize function can only throw when incrementing _size
+    //          causes the function to increment _capacity; decrementing the _size
+    //          does not change the _capacity.
+    //          Therefore, resize can only throw if newSize >= _capacity.
     // Strong Guarantee
     void resize(size_type newSize)
     {
-		// Resize if _size is not >= _capacity
+        // Resize if _size is not >= _capacity
         if(newSize < _capacity){
-			// If newSize is < 0 then set the _size to 0
-			//  	_size gets newSize otherwise
-			(newSize < 0 ? _size = 0 : _size = newSize);
+            // If newSize is < 0 then set the _size to 0
+            //      _size gets newSize otherwise
+            (newSize < 0 ? _size = 0 : _size = newSize);
             return; // Exit the function
         }
-		// Reallocate & copy if _size is >= _capacity
+        // Reallocate & copy if _size is >= _capacity
 
         size_type newCapacity = _capacity; // Set a local variable to the current capacity
 
-		// Double the newCapacity while it is smaller or equal to the newSize
+        // Double the newCapacity while it is smaller or equal to the newSize
         while(newCapacity <= newSize) {
             newCapacity *= 2;
         }
 
-		// Create new value_type ptr
-		// Initialize the temp ptr to have a size of newCapacity
-		auto temp = new value_type[newCapacity]; // This could throw; Error passed to client code
-		// If the above new throws, then ptr is never created and doesn't need to be deleted
+        // Create new value_type ptr
+        // Initialize the temp ptr to have a size of newCapacity
+        auto temp = new value_type[newCapacity]; // This could throw; Error passed to client code
+        // If the above new throws, then ptr is never created and doesn't need to be deleted
 
         try{
-			// Copy all the values from the current array into the temp array
+        // Copy all the values from the current array into the temp array
             std::copy(begin(), end(), temp); // This could throw
         }
         catch(...){ // Catch error and delete allocated ptr
@@ -274,12 +273,12 @@ public:
 
         delete [] _data; // deallocate the original array
 
-		// Re-assign all old values to new values
-		// AKA - Commit changes
-        _data = temp;
-        _capacity = newCapacity;
-        _size = newSize;
-		// Cannot delete temp because ownership of the ptr was passed to _data
+         // Re-assign all old values to new values
+         // AKA - Commit changes
+         _data = temp;
+         _capacity = newCapacity;
+         _size = newSize;
+         // Cannot delete temp because ownership of the ptr was passed to _data
     }
 
     // insert
@@ -287,15 +286,15 @@ public:
     iterator insert(iterator pos,
                     const value_type & item)
     {
-		// Find the index indicated by the passed iterator
+        // Find the index indicated by the passed iterator
         size_type index = size_type(std::distance(begin(), pos)); // This does not throw
 
-		// Call resize function to increase the size by 1
+        // Call resize function to increase the size by 1
         resize(size()+1); // Could possibly throw, in which case no change is made
 
-		// Shift all the data stored in the array from the index to the end
-		//  	over by 1
-		// Uses move for efficiency, and because it is noexcept
+        // Shift all the data stored in the array from the index to the end
+        //  	over by 1
+        // Uses move for efficiency, and because it is noexcept
         std::move(begin() + index, end(), begin()+index + 1); // Cannot throw
 
         _data[index] = item; // Replace the old data stored at index with the new data
@@ -307,27 +306,27 @@ public:
     // No-throw Guarantee
     iterator erase(iterator pos)
     {
-		// Shift all the values in front of the given pos
-		//  	down one; overwriting the value at pos
+        // Shift all the values in front of the given pos
+        //  	down one; overwriting the value at pos
         std::move(pos+1, end(), pos); // Cannot throw
 
         resize(_size-1); // Resize last to erase the last index
-		// The above implementation of the resize function cannot throw
-		//  	the resize function can only throw when incrementing _size
-		//  	causes the function to increment _capacity; decrementing the _size
-		//  	does not change the _capacity. Therefore, resize can only throw if 
-		//  	newSize >= _capacity, which will never happen when decrementing. 
+        // The above implementation of the resize function cannot throw
+        //  	the resize function can only throw when incrementing _size
+        //  	causes the function to increment _capacity; decrementing the _size
+        //  	does not change the _capacity. Therefore, resize can only throw if
+        //  	newSize >= _capacity, which will never happen when decrementing.
 
-		// Return the pos of the deleted item which was replaced with the item after it
-		// Returns end if the item removed was the last item in the array
-        return pos; 
+        // Return the pos of the deleted item which was replaced with the item after it
+        // Returns end if the item removed was the last item in the array
+        return pos;
     }
 
     // push_back
     // Strong Guarantee
     void push_back(const value_type & item)
     {
-		// Insert an item at the end of the array
+        // Insert an item at the end of the array
         insert(end(), item); // Can throw; error passed to client code, no changes made
     }
 
@@ -335,7 +334,7 @@ public:
     // No-throw Guarantee
     void pop_back()
     {
-		// Erase the last item in the array
+        // Erase the last item in the array
         erase(end()-1); // Cannot throw
     }
 
@@ -343,7 +342,7 @@ public:
     // No-Throw Guarantee
     void swap(FSTArray & other) noexcept
     {
-		// Use std::swap to exchange the data members of *this with other
+        // Use std::swap to exchange the data members of *this with other
         std::swap(_data, other._data);
         std::swap(_capacity, other._capacity);
         std::swap(_size, other._size);

@@ -11,10 +11,15 @@
 
 int main(){
 	FSTArray<int> tst;
-	FSTArray<int> fsf(100);
+	FSTArray<int> fsf(10);
+
+	// set values for fsf
+	for(std::size_t i = 0; i < fsf.size(); ++i){
+		fsf[i] = 0;
+	}
 
     //test insert
-    fsf.insert(fsf.begin()+3, 21);
+    fsf.insert(fsf.begin(), 21);
     std::cout << "size: " << fsf.size() << std::endl;
     for(std::size_t i = 0; i < fsf.size(); ++i){
         //fsf[i] = i;

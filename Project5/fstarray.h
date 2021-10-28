@@ -52,8 +52,9 @@
 #define FALL2021_CS311_FSTARRAY_H
 
 #include <cstddef>      // For std::size_t
-#include <algorithm>    // For std::max & std::copy & std::rotate
+#include <algorithm>    // For std::max & std::copy
 #include <utility>      // For std::move
+#include <iterator>     // For std::distance
 
 
 /******************************************/
@@ -250,18 +251,13 @@ public:
                     const value_type & item)
     {
 
-        // Current crashing issue seems to stem from code below
+        resize(size()+1); // Could possibly throw, in which case no change is made
 
-        resize(_size+1); // Could possibly throw, in which case no change is made
+		std::move(pos, end(), pos +1);
+		size_type index = std::distance(begin(), pos);
+		_data[index] = item;
 
-        auto range = _size - size_type((pos - _data + 1));// Find how much to move
-
-        for(size_type i = 0; i < range; ++i)
-            std::rotate(pos, pos + 1, end());//From given position move everything up by one.
-        
-        _data[_size - range - 1] = item; //Insert AKA Commit
-
-        return (_data + _size - range - 1);
+        return begin() + index;
     }
 
     // erase

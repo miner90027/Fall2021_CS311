@@ -6,8 +6,8 @@
  * Updated: 2021-10-20
  *
  * Finished by:
- * Aleks McCormick & Purev
- * 2021/10/22
+ * Aleks McCormick & Chuluunbat Purev
+ * 2021/10/27
  *
  * For CS 311 Fall 2021
  * Header for class FSTArray
@@ -46,6 +46,8 @@
  *   - Revise class invariants & ctors accordingly.
  *   - Add constant DEFAULT_CAP and use it in setting the capacity in
  *     default ctor/ctor from size.
+ * - V7:
+ *      
  */
 
 #ifndef FALL2021_CS311_FSTARRAY_H
@@ -55,7 +57,6 @@
 #include <algorithm>    // For std::max & std::copy
 #include <utility>      // For std::move
 #include <iterator>     // For std::distance
-#include <iostream>
 
 
 /******************************************/
@@ -121,19 +122,13 @@ public:
              _data(other._capacity == 0 ? nullptr
                                         : new value_type[other._capacity])
     {
-        
-		try {
-			std::copy(other.begin(), other.end(), begin());
-		}
-		catch (...){
-			delete [] _data;
-			throw;
-		}
-
-
-        // The above call to std::copy does not throw, since it copies int
-        // values. But if value_type is changed, then the call may throw, in
-        // which case this copy ctor may need to be rewritten.
+        try{
+        std::copy(other.begin(), other.end(), begin());
+        }
+        catch(...){
+            delete [] _data;
+            throw;
+        }
     };
 
     // Move ctor,
@@ -149,7 +144,7 @@ public:
     }
 
     // Copy assignment operator
-    // ??? Guarantee
+    // No-Throw Guarantee
     FSTArray & operator=(const FSTArray<Type> & other)
     {
         auto obj = other;   
@@ -179,7 +174,8 @@ public:
 
     // operator[] - non-const & const
     // Pre:
-    //     ???
+    //     0 <= index < _size
+    //     _data cannot be null,
     // No-Throw Guarantee
     value_type & operator[](size_type index)
     {
@@ -232,6 +228,8 @@ public:
     }
 
     // resize
+    //Pre:
+    //      newsize >= 0
     // Strong Guarantee
     void resize(size_type newsize)
     {
@@ -245,30 +243,32 @@ public:
         while(newCapacity <= newsize) {
             newCapacity *= 2;
         }
-        auto *temp = new value_type[newCapacity]; //This could throw
-		try{
-			std::copy(begin(), end(), temp); //This could throw
-		}
-		catch (...){
-			delete [] temp;
-			throw;
-		}
+        value_type * temp;
 
-        //if either of the lines above throw, then the below code will not commit any changes
-		delete [] _data;
+        temp = new value_type[newCapacity]; //This could throw
+
+        try{
+            std::copy(begin(), end(), temp); //This could throw
+        }
+        catch(...){
+            delete [] temp;
+            throw;
+        }
+
+        delete [] _data;
+
+        _data = temp;
         _capacity = newCapacity;
         _size = newsize;
-        _data = temp;
 
-        //delete temp;
     }
 
     // insert
-    // ??? Guarantee
-    iterator insert(value_type * pos,
+    // Strong Guarantee
+    iterator insert(iterator pos,
                     const value_type & item)
     {
-        size_type index = std::distance(begin(), pos);
+        size_type index = size_type(std::distance(begin(), pos));
 
         resize(size()+1); // Could possibly throw, in which case no change is made
         
@@ -280,25 +280,25 @@ public:
     }
 
     // erase
-    // ??? Guarantee
+    // No-throw Guarantee
     iterator erase(iterator pos)
     {
-
-		std::move(pos+1, end(), pos);
-        resize(_size-1); //Resize last so we erase the last index?
-
+        std::move(pos+1, end(), pos);
+        resize(_size-1); // Resize last so we erase the last index
+                         // Does not throw, because post condition in resize
+                         // Decrementing size
         return pos; 
     }
 
     // push_back
-    // ??? Guarantee
+    // Strong Guarantee
     void push_back(const value_type & item)
     {
         insert(end(), item);
     }
 
     // pop_back
-    // ??? Guarantee
+    // No-throw Guarantee
     void pop_back()
     {
         erase(end()-1);

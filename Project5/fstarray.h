@@ -267,11 +267,8 @@ public:
     // ??? Guarantee
     iterator erase(iterator pos)
     {
-        auto range = _size - size_type((pos - _data + 1));// Find how much to interate to find position
 
-        for(size_type i = 0; i < range; ++i)
-            std::rotate(pos , pos+range, end()); //Rotate till erased index is in last
-
+		std::move(pos+1, end(), pos);
         resize(_size-1); //Resize last so we erase the last index?
 
         return pos; 

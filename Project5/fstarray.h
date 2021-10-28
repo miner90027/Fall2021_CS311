@@ -120,6 +120,8 @@ public:
              _data(other._capacity == 0 ? nullptr
                                         : new value_type[other._capacity])
     {
+        
+
         std::copy(other.begin(), other.end(), begin());
         // The above call to std::copy does not throw, since it copies int
         // values. But if value_type is changed, then the call may throw, in
@@ -247,37 +249,16 @@ public:
 
     // insert
     // ??? Guarantee
-    iterator insert(iterator pos,
+    iterator insert(value_type * pos,
                     const value_type & item)
     {
+        size_type index = std::distance(begin(), pos);
 
         resize(size()+1); // Could possibly throw, in which case no change is made
-
-        /*for(auto i = 0; i<_capacity; ++i){
-            std::cout << *(_data + i) << " ";
-        }*/
-        //std::cout << std::endl;
-        //std::cout << "CHANGE~~~~~~~"<< std::endl;
-        size_type index;
-
-        for(auto i = 0; i < _size; ++i){
-            if(*pos == *(_data + i))
-                index = i;
-        }
-        //std::cout << index << " ; " << *(end() - 2) << " ; "<< _data[index] << std::endl;
         
         std::move(begin() + index, end(), begin()+index + 1);
 
         _data[index] = item;
-
-        //std::cout << *pos << std::endl;
-        /*for(auto i = 0; i<_capacity; ++i){
-            std::cout << _data[i] << " ";
-        }*/
-
-        //std::cout << std::endl;
-        //size_type index = std::distance(begin(), pos);
-        //_data[index] = item;
 
         return _data + index;
     }

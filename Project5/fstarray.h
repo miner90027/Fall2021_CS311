@@ -235,14 +235,14 @@ public:
         while(newCapacity <= newsize) {
             newCapacity *= 2;
         }
-
         auto *temp = new value_type[newCapacity]; //This could throw
         std::copy(begin(), end(), temp); //This could throw
-
         //if either of the lines above throw, then the below code will not commit any changes
         _capacity = newCapacity;
         _size = newsize;
         _data = temp;
+
+        //delete temp;
     }
 
     // insert
@@ -253,11 +253,33 @@ public:
 
         resize(size()+1); // Could possibly throw, in which case no change is made
 
-		std::move(pos, end(), pos +1);
-		size_type index = std::distance(begin(), pos);
-		_data[index] = item;
+        /*for(auto i = 0; i<_capacity; ++i){
+            std::cout << *(_data + i) << " ";
+        }*/
+        //std::cout << std::endl;
+        //std::cout << "CHANGE~~~~~~~"<< std::endl;
+        size_type index;
 
-        return begin() + index;
+        for(auto i = 0; i < _size; ++i){
+            if(*pos == *(_data + i))
+                index = i;
+        }
+        //std::cout << index << " ; " << *(end() - 2) << " ; "<< _data[index] << std::endl;
+        
+        std::move(begin() + index, end(), begin()+index + 1);
+
+        _data[index] = item;
+
+        //std::cout << *pos << std::endl;
+        /*for(auto i = 0; i<_capacity; ++i){
+            std::cout << _data[i] << " ";
+        }*/
+
+        //std::cout << std::endl;
+        //size_type index = std::distance(begin(), pos);
+        //_data[index] = item;
+
+        return _data + index;
     }
 
     // erase
@@ -292,8 +314,8 @@ public:
     // No-Throw Guarantee
     void swap(FSTArray & other) noexcept
     {
-		std::swap(_data, other._data);
-		std::swap(_capacity, other._capacity);
+        std::swap(_data, other._data);
+        std::swap(_capacity, other._capacity);
         std::swap(_size, other._size);
     }
 

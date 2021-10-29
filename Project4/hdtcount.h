@@ -20,21 +20,8 @@ using boardType = std::vector<std::vector<int>>;
 // Define container class to contain all the functions
 // Invariants: None
 class HDTCounter{
-	/******************************************/
-	/***      Public Friend Functions       ***/
-	/******************************************/
+
 public:
-	// hdtCount()
-	// Wrapper function that Returns the total possible number of ways dominoes can be placed
-	//  on a board of a given siz given that there are 2 places on the board that do not exist
-	// The only public facing function for the class; made friend to be accessed by client
-	// Function does not throw
-	// Preconditions:
-	//  	both dim_x & dim_y must be >= 1
-	//  	all the forbid_x variables must fall within the values between 0 & x
-	//  	all the forbid_y variables must fall within the values between 0 & y
-	friend int hdtCount(int dim_x, int dim_y, int forbid1_x,
-						int forbid1_y, int forbid2_x, int forbid2_y);
 
 	/******************************************/
 	/***            The Big Five:           ***/
@@ -56,11 +43,11 @@ public:
 	HDTCounter & operator=(const HDTCounter &) = delete;
 	// Move assignment operator
 	HDTCounter & operator=(HDTCounter &&) = delete;
-	
+
 	/******************************************/
-	/***     Private Member Functions       ***/
+	/***     Public Member Functions       ***/
 	/******************************************/
-private:
+
     // hdtCount_recurse()
     // Recursive workhorse function for hdtCount()
     // Returns the total number of possible solutions for a given board
@@ -72,6 +59,10 @@ private:
     //  	   that can be held in the board - the 2 forbidden spaces
 	int hdtCount_recurse(boardType & board, int squaresLeft);
 
+	/******************************************/
+	/***     Private Member Functions       ***/
+	/******************************************/
+private:
     // checkHorizontal()
     // Returns true if a domino can be placed horizontally on the given board at the given
     //  coordinates
@@ -98,5 +89,20 @@ private:
     //  	board must be a valid boardType
 	static bool checkRange(const boardType & board, unsigned int x, unsigned int y);
 };
+
+/******************************************/
+/***      Public Friend Functions       ***/
+/******************************************/
+// hdtCount()
+// Wrapper function that Returns the total possible number of ways dominoes can be placed
+//  on a board of a given siz given that there are 2 places on the board that do not exist
+// The only public facing function for the class; made friend to be accessed by client
+// Function does not throw
+// Preconditions:
+//  	both dim_x & dim_y must be >= 1
+//  	all the forbid_x variables must fall within the values between 0 & x
+//  	all the forbid_y variables must fall within the values between 0 & y
+int hdtCount(int dim_x, int dim_y, int forbid1_x,
+					int forbid1_y, int forbid2_x, int forbid2_y);
 
 #endif //FALL2021_CS311_HDTCOUNT_H

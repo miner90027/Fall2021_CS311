@@ -91,7 +91,7 @@ private:
 };
 
 /******************************************/
-/***      Public Friend Functions       ***/
+/***         Global Functions           ***/
 /******************************************/
 // hdtCount()
 // Wrapper function that Returns the total possible number of ways dominoes can be placed

@@ -10,7 +10,8 @@
 #ifndef FALL2021_CS311_DP6_H
 #define FALL2021_CS311_DP6_H
 
-#include <utility>  	//for std::unique_ptr & std::make_unique
+#include <utility>  	// For std::move & std::pair
+#include <memory>   	//for std::unique_ptr & std::make_unique
 #include "llnode2.h"
 
 // Exercise A - reverseList()
@@ -21,7 +22,7 @@
 template<typename ValType>
 void reverseList(std::unique_ptr<LLNode2<ValType>> & head){
 
-};
+}// End reverseList
 
 // Exercise B - LLMap
 // A list of associated data sets
@@ -30,7 +31,42 @@ void reverseList(std::unique_ptr<LLNode2<ValType>> & head){
 //
 template<typename KeyType, typename ValueType>
 class LLMap{
+public:
 
-};
+	LLMap(){}
+
+	LLMap(const LLMap<KeyType, ValueType> & other) = delete;
+	LLMap(LLMap<KeyType,ValueType> && other) = delete;
+	LLMap & operator=(LLMap<KeyType, ValueType> & other) = delete;
+	LLMap & operator=(LLMap<KeyType, ValueType> && other) = delete;
+
+	~LLMap() noexcept{}
+
+	int size() const {
+		return 0; // DUMMY
+	}
+
+	bool empty() const {
+		return size() == 0;
+	}
+
+	ValueType* find(const KeyType & k) const{
+		return nullptr; // DUMMY
+	}
+	ValueType* find(const KeyType & k){
+		return nullptr; // DUMMY
+	}
+
+	void insert (KeyType k, ValueType v){}
+
+	void erase(const KeyType k){}
+
+	template<typename FuncType>
+	void traverse(FuncType f){}
+
+private:
+
+	std::unique_ptr<LLNode2<std::pair<KeyType, ValueType>>> _data;
+};// End class LLMap
 
 #endif //FALL2021_CS311_DP6_H

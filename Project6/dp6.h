@@ -11,7 +11,8 @@
 #define FALL2021_CS311_DP6_H
 
 #include <utility>  	// For std::move & std::pair
-#include <memory>   	//for std::unique_ptr & std::make_unique
+#include <memory>   	// For std::unique_ptr & std::make_unique
+#include <cstddef>  	// For std::size_t
 #include "llnode2.h"
 
 // Exercise A - reverseList()
@@ -47,36 +48,90 @@ template<typename KeyType, typename ValueType>
 class LLMap{
 public:
 
-	LLMap(){}
+	LLMap(): _data(nullptr){}
 
 	LLMap(const LLMap<KeyType, ValueType> & other) = delete;
 	LLMap(LLMap<KeyType,ValueType> && other) = delete;
 	LLMap & operator=(LLMap<KeyType, ValueType> & other) = delete;
 	LLMap & operator=(LLMap<KeyType, ValueType> && other) = delete;
 
-	~LLMap() noexcept{}
+	~LLMap() noexcept = default;
 
-	int size() const {
-		return 0; // DUMMY
+
+	[[nodiscard]] std::size_t size() const {
+		auto item = _data.get();
+		std::size_t counter = 0;
+
+		while(item){
+			item = item->_next.get();
+			++counter;
+		}
+
+		return counter;
 	}
 
-	bool empty() const {
-		return size() == 0;
+	[[nodiscard]] bool empty() const {
+		return !_data;
 	}
 
-	ValueType* find(const KeyType & k) const{
+	const ValueType * find(const KeyType & k) const{
+		auto item = _data.get();
+
+		while(item){
+			if(item -> _data.first == k)
+				return &item -> _data.second;
+			item = item -> _next.get();
+		}
+
 		return nullptr; // DUMMY
 	}
-	ValueType* find(const KeyType & k){
+
+	ValueType * find(const KeyType & k){
+		auto item = _data.get();
+
+		while(item){
+			if(item -> _data.first == k)
+				return &item -> _data.second;
+			item = item -> _next.get();
+		}
+
 		return nullptr; // DUMMY
 	}
 
-	void insert (KeyType k, ValueType v){}
+	void insert (KeyType k, ValueType v){
+		auto found = find(k);
 
-	void erase(const KeyType k){}
+		if(!found){
+			push_front(_data, std::make_pair(k,v));
+		}
+		else
+			*found = v;
+	}
+
+	void erase(const KeyType k){
+		auto curItem = _data.get();
+		auto prevItem = _data.get();
+
+		while(curItem){
+			if(curItem -> _data.first == k){
+				prevItem -> _next = std::move(curItem -> _next);
+				return;
+			}
+
+			prevItem = curItem;
+			curItem = curItem -> _next.get();
+		}
+	}
 
 	template<typename FuncType>
-	void traverse(FuncType f){}
+	void traverse(FuncType func){
+		auto item = _data.get();
+
+		while (item){
+			func(item -> _data.first, item -> _data.second);
+			item = item -> _next.get();
+		}
+	}
 
 private:
 

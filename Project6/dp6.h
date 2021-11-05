@@ -22,6 +22,20 @@
 template<typename ValType>
 void reverseList(std::unique_ptr<LLNode2<ValType>> & head){
 
+	std::unique_ptr<LLNode2<ValType>> newHead = nullptr;
+	std::unique_ptr<LLNode2<ValType>> tempA;
+	std::unique_ptr<LLNode2<ValType>> tempB;
+
+	while (head){
+		tempA = std::move(newHead);
+		tempB = std::move(head -> _next);
+
+		newHead = std::move(head);
+		head = std::move(tempB);
+		newHead -> _next = std::move(tempA);
+	}
+
+	head = std::move(newHead);
 }// End reverseList
 
 // Exercise B - LLMap

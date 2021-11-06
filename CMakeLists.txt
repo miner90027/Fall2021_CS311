@@ -13,6 +13,7 @@ add_subdirectory(Project3)
 add_subdirectory(Project4)
 add_subdirectory(Project5)
 add_subdirectory(Project6)
+add_subdirectory(Project7)
 
 #all of the executable files
 add_executable(GlobeProject1 Project1/delivery_test.cpp Project1/delivery.cpp Project1/delivery.h)

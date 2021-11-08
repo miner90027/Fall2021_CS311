@@ -22,3 +22,4 @@ add_executable(GlobeProject3 Project3/dp3_test.cpp Project3/dp3.h Project3/dp3.c
 add_executable(GlobeProject4 Project4/hdtcount_test.cpp Project4/hdtcount.cpp Project4/hdtcount.h)
 add_executable(GlobeProject5 Project5/fstarray.h Project5/fstarray_test.cpp)
 add_executable(GlobeProject6 Project6/dp6_test.cpp Project6/dp6.h)
+add_executable(GlobeProject7 Project7/treesorter_test.cpp Project7/treesorter.h)

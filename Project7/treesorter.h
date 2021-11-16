@@ -64,7 +64,7 @@ void insert(const DataType & k, std::unique_ptr<Node<DataType>> & head){
 // traverse()
 // Preforms an inorder traversal of the binary tree given iter value
 // Preconditions:
-//  	none
+//  	node must be a valid pointer to a binary tree node, or nullptr if empty
 // Requirements on types:
 //  	DataType must have copy assignment defined
 //  	FDIter must have post increment defined

@@ -24,4 +24,5 @@ add_executable(GlobeProject4 Project4/hdtcount_test.cpp Project4/hdtcount.cpp Pr
 add_executable(GlobeProject5 Project5/fstarray.h Project5/fstarray_test.cpp)
 add_executable(GlobeProject6 Project6/dp6_test.cpp Project6/dp6.h)
 add_executable(GlobeProject7 Project7/treesorter_test.cpp Project7/treesorter.h)
-add_executable(GlobeProject8 Project8/squarer_test.cpp Project8/squarer.h)
+add_executable(GlobeProject8_A Project8/countwords.cpp)
+add_executable(GlobeProject8_B Project8/squarer_test.cpp Project8/squarer.h)

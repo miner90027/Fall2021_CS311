@@ -14,6 +14,7 @@ add_subdirectory(Project4)
 add_subdirectory(Project5)
 add_subdirectory(Project6)
 add_subdirectory(Project7)
+add_subdirectory(Project8)
 
 #all of the executable files
 add_executable(GlobeProject1 Project1/delivery_test.cpp Project1/delivery.cpp Project1/delivery.h)
@@ -23,3 +24,4 @@ add_executable(GlobeProject4 Project4/hdtcount_test.cpp Project4/hdtcount.cpp Pr
 add_executable(GlobeProject5 Project5/fstarray.h Project5/fstarray_test.cpp)
 add_executable(GlobeProject6 Project6/dp6_test.cpp Project6/dp6.h)
 add_executable(GlobeProject7 Project7/treesorter_test.cpp Project7/treesorter.h)
+add_executable(GlobeProject8 Project8/squarer_test.cpp Project8/squarer.h)

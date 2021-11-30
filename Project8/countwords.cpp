@@ -38,6 +38,24 @@ int main(){
 					"Please specify a file to open, my need to specify the absolute file path." << endl;
 	}while(!fileIn);
 
-	cout << "Input: " << fileName << endl;
+	std::map<string, int> data;
+	string line;
+
+	while(fileIn >> line){
+		++data[line];
+	}
+	/*
+	if(fileIn.eof()){
+
+	}*/
+
+	cout << "Number of distinct words: " << data.size() << endl << endl;
+
+	for(const auto & kvp: data){
+		cout << kvp.first << ": " << kvp.second << endl;
+	}
+
+	fileIn.close();
+	//cout << "Input: " << fileName << endl;
 	return 0;
 }

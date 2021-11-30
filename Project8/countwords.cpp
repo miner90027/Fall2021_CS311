@@ -23,15 +23,19 @@ int main(){
 
 	// String to store the user input file name
 	string fileName;
-
-	cout << "Please enter the file path for the file you wish to open.\nFile path:";
-	getline(cin, fileName);
-
 	ifstream fileIn(fileName);
-	if(!fileIn){
-		cout << "The input file could not be opened. Please specify a file to open, my need to specify the file path." << endl;
-		return -1;
-	}
+
+	// Receive the file path from the user
+	// Verify that the file can be found.
+	// Prompt the user for a file until a valid file is input
+	do{
+		cout << "Please enter the file path for the file you wish to open.\nFile path:";
+		getline(cin, fileName);
+		fileIn = std::ifstream (fileName);
+
+		if(!fileIn)
+			cout << "The input file could not be opened. Please specify a file to open, my need to specify the file path." << endl;
+	}while(!fileIn);
 
 	cout << "Input: " << fileName << endl;
 	return 0;

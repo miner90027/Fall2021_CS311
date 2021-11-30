@@ -42,20 +42,116 @@ const std::string test_suite_name =
     " - CS 311 Proj 8, Ex B";
 
 
-// *********************************************************************
-// Test Cases
-// *********************************************************************
+/******************************************/
+/***            Test Cases              ***/
+/******************************************/
 
 
-TEST_CASE("DUMMY")
+TEST_CASE("Squarer: Positive Ints")
 {
-    // DUMMY TEST CASE; REWRITE THIS AND ADD MORE!!!
-}
+    Squarer sq;
+
+	SUBCASE("Square 0"){
+		INFO("0 squared is 0");
+		REQUIRE(sq(0) == 0);
+	}
+	SUBCASE("Square 1"){
+		INFO("1 squared is 1");
+		REQUIRE(sq(1) == 1);
+	}
+	SUBCASE("Square 2"){
+		INFO("2 squared is 4");
+		REQUIRE(sq(2) == 4);
+	}
+	SUBCASE("Square 7"){
+		INFO("7 squared is 49");
+		REQUIRE(sq(7) == 49);
+	}
+	SUBCASE("Square 10"){
+		INFO("10 squared is 100");
+		REQUIRE(sq(10) == 100);
+	}
+	SUBCASE("Square 12234"){
+		INFO("12234 squared is 149670756");
+		REQUIRE(sq(12234) == 149670756);
+	}
+}// End Positive ints test case
+
+TEST_CASE("Squarer: Negative Ints")
+{
+	Squarer sq;
+
+	SUBCASE("Square -1"){
+		INFO("-1 squared is 1");
+		REQUIRE(sq(-1) == 1);
+	}
+	SUBCASE("Square -2"){
+		INFO("-2 squared is 4");
+		REQUIRE(sq(-2) == 4);
+	}
+	SUBCASE("Square -7"){
+		INFO("-7 squared is 49");
+		REQUIRE(sq(-7) == 49);
+	}
+	SUBCASE("Square -10"){
+		INFO("-10 squared is 100");
+		REQUIRE(sq(-10) == 100);
+	}
+	SUBCASE("Square -12234"){
+		INFO("-12234 squared is 149670756");
+		REQUIRE(sq(-12234) == 149670756);
+	}
+}// End Negative ints test case
+
+TEST_CASE("Squarer: Floating-point values")
+{
+	Squarer sq;
+
+	SUBCASE("Square 0.0"){
+		INFO("0.0 squared is 0.0");
+		REQUIRE(sq(0.0) == 0.0);
+	}
+	SUBCASE("Square 1.5"){
+		INFO("1.5 squared is 2.25");
+		REQUIRE(sq(1.5) == doctest::Approx(2.25));
+	}
+	SUBCASE("Square -2.9"){
+		INFO("-2.9 squared is 8.41");
+		REQUIRE(sq(-2.9) == doctest::Approx(8.41));
+	}
+	SUBCASE("Square 7.7"){
+		INFO("7.7 squared is 59.29");
+		REQUIRE(sq(7.7) == doctest::Approx(59.29));
+	}
+	SUBCASE("Square -10.10"){
+		INFO("-10.1 squared is 102.01");
+		REQUIRE(sq(-10.1) == doctest::Approx(102.01));
+	}
+	SUBCASE("Square 12234.00002"){
+		INFO("12234.00002 squared is 149670756.4893600004");
+		REQUIRE(sq(12234.00002) == doctest::Approx(149670756.4893600004));
+	}
+}// End Floating-point values test case
+
+TEST_CASE("Squarer: Const values"){
+	Squarer sq;
+	const int num = 5;
+
+	SUBCASE("Const variable"){
+		INFO("Square Const int Variable");
+		REQUIRE(sq(num) == 25);
+	}
+
+	SUBCASE("Double Squarer"){
+		INFO("Square the result produced by Squarer");
+		REQUIRE(sq(sq(num)) == 625);
+	}
+}// End Const values test case
 
 
-// *********************************************************************
-// Main Program
-// *********************************************************************
+/******************************************/
+/***           Main Program             ***/
+/******************************************/
 
 
 // userPause

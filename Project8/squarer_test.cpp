@@ -138,12 +138,12 @@ TEST_CASE("Squarer: Const values"){
 	const int num = 5;
 
 	SUBCASE("Const variable"){
-		INFO("Square Const int Variable");
+		INFO("Square Const int Variable.");
 		REQUIRE(sq(num) == 25);
 	}
 
-	SUBCASE("Double Squarer"){
-		INFO("Square the result produced by Squarer");
+	SUBCASE("Squaring output of Squarer"){
+		INFO("Square the result produced by Squarer. 5 squared is 25; 25 squared is 625");
 		REQUIRE(sq(sq(num)) == 625);
 	}
 }// End Const values test case

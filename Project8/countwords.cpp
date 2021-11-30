@@ -4,7 +4,7 @@
  * 2021/11/22
  * Fall 2021 CS 311
  * Project 8 Exercise A
- * Counts the number of words in a file
+ * Counts the number of unique words in a file
  */
 
 #include <iostream> 	// For std::cout , std::cin , std::endl;
@@ -18,7 +18,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
+// main program
+// Counts the number of unique words in a file
 int main(){
 
 	// String to store the user input file name

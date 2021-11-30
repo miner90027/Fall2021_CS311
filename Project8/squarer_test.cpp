@@ -133,8 +133,8 @@ TEST_CASE("Squarer: Floating-point values")
 	}
 }// End Floating-point values test case
 
-TEST_CASE("Squarer: Const values"){
-	Squarer sq;
+TEST_CASE(" Const Squarer"){
+	const Squarer sq;
 	const int num = 5;
 
 	SUBCASE("Const variable"){

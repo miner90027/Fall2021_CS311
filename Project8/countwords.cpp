@@ -34,7 +34,8 @@ int main(){
 		fileIn = std::ifstream (fileName);
 
 		if(!fileIn)
-			cout << "The input file could not be opened. Please specify a file to open, my need to specify the file path." << endl;
+			cout << "The input file could not be found. "
+					"Please specify a file to open, my need to specify the absolute file path." << endl;
 	}while(!fileIn);
 
 	cout << "Input: " << fileName << endl;

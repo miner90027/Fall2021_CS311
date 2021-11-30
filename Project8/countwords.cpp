@@ -10,7 +10,7 @@
 #include <iostream> 	// For std::cout , std::cin , std::endl;
 #include <fstream>  	// For std::ifstream
 #include <string>   	// For std::string , std::getline
-#include <map>  		// For std::map
+#include <map>      	// For std::map
 
 // using statements for the library functions used for printing
 //  	I am too lazy to write out "std::" before every cout or endl
